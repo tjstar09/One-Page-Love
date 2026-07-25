@@ -1,21 +1,97 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GalleryView from './components/GalleryView';
 import DesignModal from './components/DesignModal';
-import { designTemplates } from './data/designTemplates';
+import { designTemplates, designCategories } from './data/designTemplates';
 import { searchPexelsImage } from './utils/pexels';
 import './App.css';
 
+// ─── Favorites persistence ─────────────────────────────────────────────────────
+const FAVORITES_KEY = 'ux-ui-gallery-favorites';
+function loadFavorites() {
+  try {
+    const stored = localStorage.getItem(FAVORITES_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch { return []; }
+}
+function saveFavorites(ids) {
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(ids));
+}
+
+// ─── URL state persistence ─────────────────────────────────────────────────────
+function getInitialIndexFromURL() {
+  try {
+    const hash = window.location.hash.replace('#', '');
+    if (hash.startsWith('design-')) {
+      const slug = hash.replace('design-', '');
+      const idx = designTemplates.findIndex(d => d.slug === slug);
+      if (idx >= 0) return idx;
+    }
+    const params = new URLSearchParams(window.location.search);
+    const idx = parseInt(params.get('index'), 10);
+    if (!isNaN(idx) && idx >= 0 && idx < designTemplates.length) return idx;
+  } catch {}
+  return 0;
+}
+
 export default function App() {
   const [selectedDesign, setSelectedDesign] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(getInitialIndexFromURL());
   const [galleryScrollPosition, setGalleryScrollPosition] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const [viewCount, setViewCount] = useState(0);
+  
+  // ── Filtering & Search ──
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [favoriteIds, setFavoriteIds] = useState(loadFavorites);
 
-  // Preload images for all designs
+  // ── Persist favorites ──
+  useEffect(() => { saveFavorites(favoriteIds); }, [favoriteIds]);
+
+  // ── Update URL when selected index changes ──
+  useEffect(() => {
+    const design = designTemplates[selectedIndex];
+    if (design) {
+      const url = new URL(window.location);
+      url.searchParams.set('index', selectedIndex.toString());
+      url.hash = `design-${design.slug}`;
+      window.history.replaceState({}, '', url.toString());
+    }
+  }, [selectedIndex]);
+
+  // ── Filtered designs ──
+  const filteredDesigns = useMemo(() => {
+    let list = designTemplates;
+    
+    // Category filter
+    if (activeCategory !== 'all') {
+      list = list.filter(d => d.category === activeCategory);
+    }
+    
+    // Search filter
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      list = list.filter(d => 
+        d.title.toLowerCase().includes(q) ||
+        d.skill.toLowerCase().includes(q) ||
+        d.description.toLowerCase().includes(q) ||
+        d.category.toLowerCase().includes(q)
+      );
+    }
+    
+    // Favorites filter
+    if (showFavoritesOnly) {
+      list = list.filter(d => favoriteIds.includes(d.id));
+    }
+    
+    return list;
+  }, [activeCategory, searchQuery, showFavoritesOnly, favoriteIds]);
+
+  // ── Preload images ──
   useEffect(() => {
     let mounted = true;
     const loadImages = async () => {
@@ -24,26 +100,21 @@ export default function App() {
           designTemplates.map(design => 
             searchPexelsImage(design.pexelsQuery)
               .then(photo => {
-                if (mounted) {
-                  setImagesLoaded(prev => ({ ...prev, [design.id]: photo }));
-                }
+                if (mounted) setImagesLoaded(prev => ({ ...prev, [design.id]: photo }));
               })
           )
         );
       } catch (error) {
         console.error('Error preloading images:', error);
       } finally {
-        if (mounted) {
-          setIsLoading(false);
-        }
+        if (mounted) setIsLoading(false);
       }
     };
-
     loadImages();
     return () => { mounted = false; };
   }, []);
 
-  // View counter - persist in localStorage
+  // ── View counter ──
   useEffect(() => {
     const stored = localStorage.getItem('ux-ui-gallery-views');
     const count = stored ? parseInt(stored, 10) + 1 : 1;
@@ -51,17 +122,27 @@ export default function App() {
     setViewCount(count);
   }, []);
 
-  // Track scroll position for "back to top" button
+  // ── Scroll tracking ──
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+    const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // ── Keyboard shortcut: Ctrl+F to focus search ──
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+        if (selectedDesign) return; // Don't interfere with modal
+        e.preventDefault();
+        document.querySelector('[data-search-input]')?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedDesign]);
+
   const handleDesignClick = useCallback((design, index) => {
-    // Save scroll position before opening modal
     setGalleryScrollPosition(index * 320);
     setSelectedIndex(index);
     setSelectedDesign(design);
@@ -72,7 +153,6 @@ export default function App() {
   }, []);
 
   const handleDownload = useCallback((design) => {
-    // Navigate directly to the pre-compiled zip file
     const zipUrl = design.downloadUrl;
     const link = document.createElement('a');
     link.href = zipUrl;
@@ -82,11 +162,27 @@ export default function App() {
     document.body.removeChild(link);
   }, []);
 
-  const layoutId = 'design-gallery';
+  const toggleFavorite = useCallback((designId) => {
+    setFavoriteIds(prev => 
+      prev.includes(designId) 
+        ? prev.filter(id => id !== designId)
+        : [...prev, designId]
+    );
+  }, []);
 
-  // Scroll to top function
   const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const layoutId = 'design-gallery';
+
+  // ── Category counts ──
+  const categoryCounts = useMemo(() => {
+    const counts = { all: designTemplates.length };
+    designCategories.forEach(cat => {
+      counts[cat] = designTemplates.filter(d => d.category === cat).length;
+    });
+    return counts;
   }, []);
 
   return (
@@ -195,39 +291,140 @@ export default function App() {
               and interactive patterns. Each template demonstrates a unique design skill — from agentic AI 
               interfaces to cozy café landings, brutalist dashboards to immersive 3D experiences.
             </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap justify-center gap-3"
-            >
-              {['Landing Pages', 'Dashboards', 'Applications', 'Editorial', 'Experimental'].map((cat, i) => (
-                <motion.span
-                  key={cat}
-                  className="px-4 py-2 rounded-full text-sm font-medium"
-                  style={{ 
-                    backgroundColor: designTemplates[i % 3]?.colors?.primary + '15', 
-                    color: designTemplates[i % 3]?.colors?.primary || '#3B82F6',
-                    border: `1px solid ${designTemplates[i % 3]?.colors?.primary}33`
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {cat}
-                </motion.span>
-              ))}
-            </motion.div>
           </div>
         </header>
 
-        {/* Cover Flow Gallery */}
+        {/* Gallery Section */}
         <section className="px-6 py-8 md:py-16">
           <div className="max-w-7xl mx-auto">
+            {/* Controls Bar: Search + Filters + Favorites Toggle */}
             <motion.div
+              className="mb-10 space-y-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-center mb-12"
+            >
+              {/* Search + Favorites Toggle Row */}
+              <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between">
+                {/* Search Input */}
+                <div className="relative flex-1 max-w-md">
+                  <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <input
+                    data-search-input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search by title, skill, or description... (Ctrl+F)"
+                    className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-gray-400 focus:outline-none transition-colors text-sm bg-white"
+                    aria-label="Search design templates"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      aria-label="Clear search"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+
+                {/* Favorites Toggle */}
+                <motion.button
+                  onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+                  className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-sm transition-all border-2 ${
+                    showFavoritesOnly 
+                      ? 'border-pink-400 bg-pink-50 text-pink-600' 
+                      : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
+                  }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  aria-label={showFavoritesOnly ? 'Show all templates' : 'Show favorites only'}
+                >
+                  <svg className={`w-5 h-5 ${showFavoritesOnly ? 'fill-pink-400 text-pink-400' : 'text-gray-400'}`} fill={showFavoritesOnly ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                  <span>{showFavoritesOnly ? 'Showing Favorites' : 'Favorites'}</span>
+                  {favoriteIds.length > 0 && (
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${
+                      showFavoritesOnly ? 'bg-pink-200 text-pink-700' : 'bg-gray-200 text-gray-600'
+                    }`}>
+                      {favoriteIds.length}
+                    </span>
+                  )}
+                </motion.button>
+              </div>
+
+              {/* Category Filter Chips */}
+              <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter by category">
+                {[
+                  { id: 'all', label: 'All', count: categoryCounts.all },
+                  ...designCategories.map(cat => ({ id: cat, label: cat, count: categoryCounts[cat] }))
+                ].map((cat, i) => {
+                  // Guaranteed high-contrast colors for filter chips (works for any number of categories)
+                  const chipColors = [
+                    '#3B82F6', // blue
+                    '#7C3AED', // violet
+                    '#059669', // emerald
+                    '#DC2626', // red
+                    '#D97706', // amber
+                    '#0891B2', // cyan
+                    '#9333EA', // purple
+                    '#2563EB', // royal blue
+                  ];
+                  const chipColor = chipColors[i % chipColors.length];
+                  
+                  return (
+                    <motion.button
+                      key={cat.id}
+                      onClick={() => setActiveCategory(cat.id)}
+                      role="tab"
+                      aria-selected={activeCategory === cat.id}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                        activeCategory === cat.id
+                          ? 'text-white shadow-md'
+                          : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300 hover:text-gray-900'
+                      }`}
+                      style={activeCategory === cat.id ? { 
+                        backgroundColor: chipColor,
+                      } : {}}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.03 }}
+                    >
+                      {cat.label}
+                      <span className={`ml-1.5 px-1.5 py-0.5 rounded text-xs ${
+                        activeCategory === cat.id ? 'bg-white/20' : 'bg-gray-100 text-gray-500'
+                      }`}>
+                        {cat.count}
+                      </span>
+                    </motion.button>
+                  );
+                })}
+              </div>
+
+              {/* Results count */}
+              <motion.p className="text-sm text-gray-500" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                {filteredDesigns.length === 0 ? (
+                  <span className="text-amber-600 font-medium">No templates match your filters.</span>
+                ) : (
+                  <>Showing <strong>{filteredDesigns.length}</strong> of {designTemplates.length} templates</>
+                )}
+              </motion.p>
+            </motion.div>
+
+            {/* Gallery */}
+            <motion.div
+              className="text-center mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E' }}>
                 Browse Templates
@@ -239,7 +436,8 @@ export default function App() {
 
             <div className="gallery-section">
               <GalleryView
-                designs={designTemplates}
+                key={`${activeCategory}-${searchQuery}-${showFavoritesOnly}`}
+                designs={filteredDesigns.length > 0 ? filteredDesigns : designTemplates}
                 onDesignClick={handleDesignClick}
                 selectedIndex={selectedIndex}
                 onIndexChange={setSelectedIndex}
