@@ -30,22 +30,23 @@
 - [x] Sticky top title bar with design title, skill, category
 - [x] Download trigger button (generates skills.md + design.md)
 - [x] Minimize/back to home controls (X button + Escape key + click backdrop)
-- [ ] Modal content components for all 3 designs (need designComponents integration)
+- [x] Modal content components for 3 initial designs (AgenticLanding, BentoLanding, CafeLanding, DefaultDesign)
+- [ ] Modal content components for remaining 75 designs (need designComponents integration)
 
 ## Phase 3: Text & Design Skill Enhancements - NOT STARTED
 - [ ] Integrate js-text-library for rich text effects across designs
 - [ ] Apply frontend-design skill for baseline component styling and fallbacks
 
-## Phase 4: Downloads & Asset Bundling - PARTIAL
+## Phase 4: Downloads & Asset Bundling - COMPLETE
 - [x] Download button functional (generates two .md files on click)
-- [ ] Connect to pre-compiled .zip files in public/assets folder
-- [ ] Create public/assets with .zip bundles containing design.md + skills.md
-- [ ] Ensure asset paths and fallback images function offline/without API
+- [x] Connect to pre-compiled .zip files in public/assets folder
+- [x] Create public/assets with .zip bundles containing design.md + skills.md
+- [x] Ensure asset paths and fallback images function offline/without API
 
-## Phase 5: Full Gallery Expansion & Polish - NOT STARTED
-- [ ] Expand from 3 initial designs to all 78 design templates from design-template-gallery.md
+## Phase 5: Full Gallery Expansion & Polish - IN PROGRESS
+- [x] Expand from 3 initial designs to all 78 design templates from design-template-gallery.md
+- [x] Populate designTemplates.js with all 78 entries
 - [ ] Add remaining design components to designComponents.js
-- [ ] Populate designTemplates.js with all 78 entries
 - [ ] Conduct final testing on micro-interactions, responsive behavior, performance
-- [ ] Optimize Pexels API caching (localStorage persistence)
+- [x] Optimize Pexels API caching (localStorage persistence) - Already implemented in pexels.js
 - [ ] Add loading states and error boundaries
