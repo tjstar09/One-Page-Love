@@ -39,7 +39,7 @@ export default function GalleryView({
         translateZ: -120,
         rotateY: -25,
         scale: 0.85,
-        opacity: 0.9,
+        opacity: 1,
         zIndex: 5,
         filter: 'brightness(0.9)',
       },
@@ -48,7 +48,7 @@ export default function GalleryView({
         translateZ: -240,
         rotateY: -40,
         scale: 0.7,
-        opacity: 0.7,
+        opacity: 1,
         zIndex: 3,
         filter: 'brightness(0.8) grayscale(0.2)',
       },
@@ -57,7 +57,7 @@ export default function GalleryView({
         translateZ: -360,
         rotateY: -50,
         scale: 0.55,
-        opacity: 0.4,
+        opacity: 1,
         zIndex: 1,
         filter: 'brightness(0.7) grayscale(0.4)',
       },
@@ -66,7 +66,7 @@ export default function GalleryView({
         translateZ: -120,
         rotateY: 25,
         scale: 0.85,
-        opacity: 0.9,
+        opacity: 1,
         zIndex: 5,
         filter: 'brightness(0.9)',
       },
@@ -75,7 +75,7 @@ export default function GalleryView({
         translateZ: -240,
         rotateY: 40,
         scale: 0.7,
-        opacity: 0.7,
+        opacity: 1,
         zIndex: 3,
         filter: 'brightness(0.8) grayscale(0.2)',
       },
@@ -84,7 +84,7 @@ export default function GalleryView({
         translateZ: -360,
         rotateY: 50,
         scale: 0.55,
-        opacity: 0.4,
+        opacity: 1,
         zIndex: 1,
         filter: 'brightness(0.7) grayscale(0.4)',
       },
@@ -232,6 +232,10 @@ export default function GalleryView({
     animateToIndex(index);
   }, [animateToIndex]);
 
+  const goToFirst = useCallback(() => {
+    animateToIndex(0);
+  }, [animateToIndex]);
+
   // Render items with absolute positioning
   const renderItems = useMemo(() => {
     return designs.map((design, index) => {
@@ -260,7 +264,7 @@ export default function GalleryView({
             opacity: config.opacity,
             zIndex: config.zIndex,
             filter: config.filter,
-            pointerEvents: isCentered ? 'auto' : 'none',
+            pointerEvents: isCentered ? 'auto' : 'auto', // Allow clicks on all items
             width: ITEM_WIDTH,
             height: ITEM_HEIGHT,
             willChange: 'transform, opacity, filter',
@@ -299,36 +303,6 @@ export default function GalleryView({
         perspectiveOrigin: 'center center',
       }}
     >
-      {/* Gallery boundary - clear visible box with fade effect */}
-      <div className="absolute inset-0 pointer-events-none z-20" aria-hidden="true">
-        {/* Visible border box */}
-        <div 
-          className="absolute inset-0 border-2 border-gray-300/60 rounded-xl shadow-lg" 
-          style={{ 
-            boxShadow: '0 0 0 1px rgba(0,0,0,0.05), 0 10px 40px -10px rgba(0,0,0,0.1)' 
-          }} 
-        />
-        {/* Top fade */}
-        <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-white to-transparent pointer-events-none" />
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent pointer-events-none" />
-        {/* Left fade */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none" />
-        {/* Right fade */}
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none" />
-        {/* Corner accents */}
-        <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-primary/50 rounded-tl-xl" />
-        <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-primary/50 rounded-tr-xl" />
-        <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-primary/50 rounded-bl-xl" />
-        <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-primary/50 rounded-br-xl" />
-      </div>
-
-      {/* Background gradient overlay on sides */}
-      <div className="absolute inset-0 pointer-events-none z-10" aria-hidden="true">
-        <div className="absolute left-0 top-0 bottom-0 w-64 bg-gradient-to-r from-white to-transparent" />
-        <div className="absolute right-0 top-0 bottom-0 w-64 bg-gradient-to-l from-white to-transparent" />
-      </div>
-
       {/* Cover flow container - centered with 3D perspective */}
       <div
         className="coverflow"
@@ -347,29 +321,25 @@ export default function GalleryView({
         {renderItems}
       </div>
 
-      {/* FIXED CENTER FRAME - visible box around centered item */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-25 pointer-events-none" aria-hidden="true">
-        <div 
-          className="w-[340px] h-[420px] md:w-[380px] md:h-[460px] rounded-2xl border-2 border-primary/30 bg-primary/5 shadow-xl"
-          style={{ 
-            boxShadow: '0 0 0 4px rgba(59, 130, 246, 0.1), 0 20px 60px -15px rgba(59, 130, 246, 0.2)',
-            borderColor: designs[centeredIndex]?.colors?.primary || '#3B82F6',
-          }}>
-          {/* Center indicator */}
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-medium rounded-full bg-primary text-white shadow-lg">
-            FOCUS
-          </div>
-          {/* Corner brackets */}
-          <div className="absolute -top-1 -left-1 w-6 h-6 border-t-2 border-l-2 border-primary/60 rounded-tl-xl" />
-          <div className="absolute -top-1 -right-1 w-6 h-6 border-t-2 border-r-2 border-primary/60 rounded-tr-xl" />
-          <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-2 border-l-2 border-primary/60 rounded-bl-xl" />
-          <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-2 border-r-2 border-primary/60 rounded-br-xl" />
-        </div>
-      </div>
-
       {/* Bottom Navigation - arrows positioned left/right of center, dots in center */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-30">
         <div className="flex items-center justify-between px-8 pb-4">
+          {/* LEFT BUTTON - Go to first */}
+          <button
+            onClick={goToFirst}
+            aria-label="Go to first design"
+            disabled={centeredIndex === 0}
+            style={{ 
+              opacity: centeredIndex === 0 ? 0.4 : 1, 
+              pointerEvents: centeredIndex === 0 ? 'none' : 'auto' 
+            }}
+            className="w-12 h-12 rounded-full bg-white border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+            </svg>
+          </button>
+
           {/* LEFT BUTTON - Previous (moves tiles right, shows previous item) */}
           <button
             onClick={goToPrevious}
@@ -379,7 +349,7 @@ export default function GalleryView({
               opacity: centeredIndex === 0 ? 0.4 : 1, 
               pointerEvents: centeredIndex === 0 ? 'none' : 'auto' 
             }}
-            className="pointer-events-auto w-12 h-12 rounded-full bg-white border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="w-12 h-12 rounded-full bg-white border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -417,10 +387,26 @@ export default function GalleryView({
               opacity: centeredIndex === designs.length - 1 ? 0.4 : 1, 
               pointerEvents: centeredIndex === designs.length - 1 ? 'none' : 'auto' 
             }}
-            className="pointer-events-auto w-12 h-12 rounded-full bg-white border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="w-12 h-12 rounded-full bg-white border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* RIGHT BUTTON - Go to last */}
+          <button
+            onClick={() => goToIndex(designs.length - 1)}
+            aria-label="Go to last design"
+            disabled={centeredIndex === designs.length - 1}
+            style={{ 
+              opacity: centeredIndex === designs.length - 1 ? 0.4 : 1, 
+              pointerEvents: centeredIndex === designs.length - 1 ? 'none' : 'auto' 
+            }}
+            className="w-12 h-12 rounded-full bg-white border border-gray-200 shadow-lg flex items-center justify-center text-gray-700 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
             </svg>
           </button>
         </div>

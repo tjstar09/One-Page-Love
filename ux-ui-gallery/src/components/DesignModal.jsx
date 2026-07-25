@@ -124,7 +124,7 @@ export default function DesignModal({
             <div className="flex items-center gap-3">
               {/* Download Button */}
               <motion.button
-                onClick={onDownload}
+                onClick={() => onDownload(design)}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-gray-700 transition-colors font-medium text-sm"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
