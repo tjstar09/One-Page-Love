@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GalleryView from './components/GalleryView';
 import DesignModal from './components/DesignModal';
-import { initialDesignTemplates } from './data/designTemplates';
+import { designTemplates } from './data/designTemplates';
 import { searchPexelsImage } from './utils/pexels';
 import './App.css';
 
@@ -21,7 +21,7 @@ export default function App() {
     const loadImages = async () => {
       try {
         await Promise.all(
-          initialDesignTemplates.map(design => 
+          designTemplates.map(design => 
             searchPexelsImage(design.pexelsQuery)
               .then(photo => {
                 if (mounted) {
@@ -72,99 +72,14 @@ export default function App() {
   }, []);
 
   const handleDownload = useCallback((design) => {
-    // Create a zip-like download with skills.md and design.md
-    const skillsContent = `# ${design.title} - Skills Documentation
-
-## Design Skill: ${design.skill}
-## Category: ${design.category}
-
-## Interactive Elements
-${design.interactiveElements.map(el => `- ${el}`).join('\n')}
-
-## Color Palette
-- Primary: ${design.colors.primary}
-- Background: ${design.colors.background}
-- Text: ${design.colors.text}
-- Accent: ${design.colors.accent}
-
-## Typography
-- Heading: ${design.fonts.heading}
-- Body: ${design.fonts.body}
-
-## Description
-${design.description}
-`;
-
-    const designContent = `# ${design.title} - Design Specification
-
-## Overview
-${design.description}
-
-## Visual Language
-This design demonstrates the **${design.skill}** skill within the **${design.category}** category.
-
-## Color System
-| Role | Value | Usage |
-|------|-------|-------|
-| Primary | ${design.colors.primary} | Main brand actions, key highlights |
-| Background | ${design.colors.background} | Page/card backgrounds |
-| Text | ${design.colors.text} | Primary text content |
-| Accent | ${design.colors.accent} | Secondary actions, hover states |
-
-## Typography Scale
-- **Headings**: ${design.fonts.heading}
-- **Body**: ${design.fonts.body}
-
-## Interactive Components
-${design.interactiveElements.map((el, i) => `${i + 1}. ${el}`).join('\n')}
-
-## Responsive Breakpoints
-- Mobile: < 640px
-- Tablet: 640px - 1024px
-- Desktop: > 1024px
-
-## Accessibility
-- Semantic HTML structure
-- Focus management
-- ARIA labels on interactive elements
-- Reduced motion support
-- Color contrast ratios (WCAG AA)
-
-## Assets
-- Images sourced from Pexels API
-- Icons from Lucide React
-- Fonts from Google Fonts
-
-## Implementation Notes
-- Built with React 19 + Vite
-- Styled with Tailwind CSS v4
-- Animations with Framer Motion 11
-- 3D Cover Flow with animejs 3.2.2
-`;
-
-    // Create and download skills.md
-    const skillsBlob = new Blob([skillsContent], { type: 'text/markdown' });
-    const skillsUrl = URL.createObjectURL(skillsBlob);
-    const skillsLink = document.createElement('a');
-    skillsLink.href = skillsUrl;
-    skillsLink.download = `${design.slug}-skills.md`;
-    document.body.appendChild(skillsLink);
-    skillsLink.click();
-    document.body.removeChild(skillsLink);
-    URL.revokeObjectURL(skillsUrl);
-
-    // Create and download design.md
-    setTimeout(() => {
-      const designBlob = new Blob([designContent], { type: 'text/markdown' });
-      const designUrl = URL.createObjectURL(designBlob);
-      const designLink = document.createElement('a');
-      designLink.href = designUrl;
-      designLink.download = `${design.slug}-design.md`;
-      document.body.appendChild(designLink);
-      designLink.click();
-      document.body.removeChild(designLink);
-      URL.revokeObjectURL(designUrl);
-    }, 100);
+    // Navigate directly to the pre-compiled zip file
+    const zipUrl = design.downloadUrl;
+    const link = document.createElement('a');
+    link.href = zipUrl;
+    link.download = `${design.slug}.zip`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }, []);
 
   const layoutId = 'design-gallery';
@@ -191,7 +106,7 @@ ${design.interactiveElements.map((el, i) => `${i + 1}. ${el}`).join('\n')}
             <div className="text-center">
               <motion.div
                 className="w-16 h-16 border-4 border-gray-200 border-t-primary rounded-full mx-auto mb-6"
-                style={{ borderTopColor: initialDesignTemplates[0]?.colors?.primary || '#3B82F6' }}
+                style={{ borderTopColor: designTemplates[0]?.colors?.primary || '#3B82F6' }}
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                 aria-hidden="true"
@@ -214,11 +129,11 @@ ${design.interactiveElements.map((el, i) => `${i + 1}. ${el}`).join('\n')}
         <header className="relative px-6 py-12 md:py-20 overflow-hidden">
           <div className="absolute inset-0" aria-hidden="true">
             <div className="absolute top-0 left-1/4 w-72 h-72 rounded-full blur-3xl opacity-20" 
-                 style={{ backgroundColor: initialDesignTemplates[0]?.colors?.primary || '#3B82F6' }} />
+                 style={{ backgroundColor: designTemplates[0]?.colors?.primary || '#3B82F6' }} />
             <div className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full blur-3xl opacity-20" 
-                 style={{ backgroundColor: initialDesignTemplates[1]?.colors?.primary || '#FAD4C0' }} />
+                 style={{ backgroundColor: designTemplates[1]?.colors?.primary || '#FAD4C0' }} />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl opacity-10" 
-                 style={{ backgroundColor: initialDesignTemplates[2]?.colors?.primary || '#5D4432' }} />
+                 style={{ backgroundColor: designTemplates[2]?.colors?.primary || '#5D4432' }} />
           </div>
 
           <div className="relative max-w-6xl mx-auto text-center">
@@ -231,9 +146,9 @@ ${design.interactiveElements.map((el, i) => `${i + 1}. ${el}`).join('\n')}
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
                    style={{ 
-                     backgroundColor: initialDesignTemplates[0]?.colors?.primary + '15', 
-                     color: initialDesignTemplates[0]?.colors?.primary || '#3B82F6',
-                     border: `1px solid ${initialDesignTemplates[0]?.colors?.primary}33`
+                     backgroundColor: designTemplates[0]?.colors?.primary + '15', 
+                     color: designTemplates[0]?.colors?.primary || '#3B82F6',
+                     border: `1px solid ${designTemplates[0]?.colors?.primary}33`
                    }}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -250,8 +165,8 @@ ${design.interactiveElements.map((el, i) => `${i + 1}. ${el}`).join('\n')}
               transition={{ duration: 0.6 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6"
               style={{ 
-                backgroundColor: initialDesignTemplates[0]?.colors?.primary + '20', 
-                color: initialDesignTemplates[0]?.colors?.primary || '#3B82F6' 
+                backgroundColor: designTemplates[0]?.colors?.primary + '20', 
+                color: designTemplates[0]?.colors?.primary || '#3B82F6' 
               }}
             >
               <span>✨</span> UX/UI Design Template Gallery
@@ -265,7 +180,7 @@ ${design.interactiveElements.map((el, i) => `${i + 1}. ${el}`).join('\n')}
               style={{ fontFamily: 'Playfair Display, serif', color: '#1A1A2E' }}
             >
               Discover{' '}
-              <span style={{ color: initialDesignTemplates[0]?.colors?.primary || '#3B82F6' }}>
+              <span style={{ color: designTemplates[0]?.colors?.primary || '#3B82F6' }}>
                 78 Design Templates
               </span>
             </motion.h1>
@@ -292,9 +207,9 @@ ${design.interactiveElements.map((el, i) => `${i + 1}. ${el}`).join('\n')}
                   key={cat}
                   className="px-4 py-2 rounded-full text-sm font-medium"
                   style={{ 
-                    backgroundColor: initialDesignTemplates[i % 3]?.colors?.primary + '15', 
-                    color: initialDesignTemplates[i % 3]?.colors?.primary || '#3B82F6',
-                    border: `1px solid ${initialDesignTemplates[i % 3]?.colors?.primary}33`
+                    backgroundColor: designTemplates[i % 3]?.colors?.primary + '15', 
+                    color: designTemplates[i % 3]?.colors?.primary || '#3B82F6',
+                    border: `1px solid ${designTemplates[i % 3]?.colors?.primary}33`
                   }}
                   whileHover={{ scale: 1.05 }}
                 >
@@ -324,7 +239,7 @@ ${design.interactiveElements.map((el, i) => `${i + 1}. ${el}`).join('\n')}
 
             <div className="gallery-section">
               <GalleryView
-                designs={initialDesignTemplates}
+                designs={designTemplates}
                 onDesignClick={handleDesignClick}
                 selectedIndex={selectedIndex}
                 onIndexChange={setSelectedIndex}
