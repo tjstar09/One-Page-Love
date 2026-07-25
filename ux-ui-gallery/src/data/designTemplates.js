@@ -1,9 +1,8 @@
-// First 3 Design Templates from design-template-gallery.md for Phase 0
-// 1. Agentic AI Chat Landing (agentic skill)
-// 2. Bento Grid Dashboard Landing (bento skill)
-// 3. Cozy Café Lifestyle Landing (cafe skill)
+// All 78 Design Templates from design-template-gallery.md
+// Organized by category: Landing Pages & Marketing (18), Dashboards & Data (12), Applications & Tools (16), Content & Editorial (10), Experimental & Playful (22)
 
-export const initialDesignTemplates = [
+export const designTemplates = [
+  // === LANDING PAGES & MARKETING (18) ===
   {
     id: 1,
     slug: 'agentic-ai-chat-landing',
@@ -85,8 +84,2052 @@ export const initialDesignTemplates = [
     },
     downloadUrl: '/assets/cozy-cafe-lifestyle-landing.zip',
   },
+  {
+    id: 4,
+    slug: 'clean-minimal-product-landing',
+    title: 'Clean Minimal Product Landing',
+    skill: 'clean',
+    category: 'Landing Pages & Marketing',
+    description: 'Ultra-simple landing with ample whitespace, Roboto/Poppins typography, limited blue palette (#3B82F6), and single-column focus on one core value proposition.',
+    interactiveElements: [
+      'Smooth scroll navigation',
+      'Demo video modal',
+      'Pricing toggle (monthly/annual)',
+      'Email capture with inline validation',
+      'Back-to-top button'
+    ],
+    pexelsQuery: 'minimal product landing page',
+    colors: {
+      primary: '#3B82F6',
+      background: '#FFFFFF',
+      text: '#1F2937',
+      accent: '#60A5FA',
+    },
+    fonts: {
+      heading: 'Poppins, system-ui, sans-serif',
+      body: 'Roboto, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/clean-minimal-product-landing.zip',
+  },
+  {
+    id: 5,
+    slug: 'corporate-enterprise-landing',
+    title: 'Corporate Enterprise Landing',
+    skill: 'corporate',
+    category: 'Landing Pages & Marketing',
+    description: 'Professional, structured grid layout with Open Sans/Poppins, enterprise blue palette, trust signals, client logos, and AI-personalization hint sections.',
+    interactiveElements: [
+      'Mega-menu navigation',
+      'Customer logo carousel',
+      'ROI calculator widget',
+      'Demo request form with multi-step progress',
+      'Language/region selector'
+    ],
+    pexelsQuery: 'corporate office workspace',
+    colors: {
+      primary: '#1E40AF',
+      background: '#F8FAFC',
+      text: '#1E293B',
+      accent: '#3B82F6',
+    },
+    fonts: {
+      heading: 'Poppins, system-ui, sans-serif',
+      body: 'Open Sans, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/corporate-enterprise-landing.zip',
+  },
+  {
+    id: 6,
+    slug: 'creative-portfolio-hero-landing',
+    title: 'Creative Portfolio Hero Landing',
+    skill: 'creative',
+    category: 'Landing Pages & Marketing',
+    description: 'Playful, character-driven landing with Bangers display font, bold graphics, vibrant accents, and asymmetrical layout blocks for creative agencies/portfolios.',
+    interactiveElements: [
+      'Cursor-following blob animation',
+      'Project card 3D tilt on hover',
+      'Filter isotope gallery',
+      'Animated statistics counters',
+      'Theme toggle (light/dark)'
+    ],
+    pexelsQuery: 'creative agency portfolio',
+    colors: {
+      primary: '#7C3AED',
+      background: '#FAFAFA',
+      text: '#111827',
+      accent: '#F472B6',
+    },
+    fonts: {
+      heading: 'Bangers, cursive',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/creative-portfolio-hero-landing.zip',
+  },
+  {
+    id: 7,
+    slug: 'colorful-gradient-saas-landing',
+    title: 'Colorful Gradient SaaS Landing',
+    skill: 'colorful',
+    category: 'Landing Pages & Marketing',
+    description: 'High-contrast, gradient-rich landing with vibrant transitions (#990FFA → #E60076), Inter typography, and playful energy for modern SaaS products.',
+    interactiveElements: [
+      'Gradient border pulse on primary buttons',
+      'Floating shape parallax',
+      'Feature accordion',
+      'Testimonial slider with keyboard nav',
+      'Confetti burst on signup'
+    ],
+    pexelsQuery: 'colorful gradient background',
+    colors: {
+      primary: '#990FFA',
+      background: '#FFFFFF',
+      text: '#1F2937',
+      accent: '#E60076',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/colorful-gradient-saas-landing.zip',
+  },
+  {
+    id: 8,
+    slug: 'contemporary-bento-dashboard-preview',
+    title: 'Contemporary Bento Dashboard Preview',
+    skill: 'contemporary',
+    category: 'Landing Pages & Marketing',
+    description: 'Modern minimalist landing with bento-grid preview, dark mode toggle, Jost typography, and magenta/pink accents (#C800DF) for dev-tools/products.',
+    interactiveElements: [
+      'Dark/light mode instant switch',
+      'Live dashboard preview iframe',
+      'Code snippet copy buttons',
+      'Feature flag toggles',
+      'Command palette demo (⌘K)'
+    ],
+    pexelsQuery: 'modern developer dashboard',
+    colors: {
+      primary: '#C800DF',
+      background: '#0F172A',
+      text: '#F8FAFC',
+      accent: '#F472B6',
+    },
+    fonts: {
+      heading: 'Jost, system-ui, sans-serif',
+      body: 'Jost, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/contemporary-bento-dashboard-preview.zip',
+  },
+  {
+    id: 9,
+    slug: 'cosmic-sci-fi-game-landing',
+    title: 'Cosmic Sci-Fi Game Landing',
+    skill: 'cosmic',
+    category: 'Landing Pages & Marketing',
+    description: 'Futuristic dark-theme landing with neon cyan/purple accents, Audiowide font, starfield background, and immersive spatial depth for gaming/sci-fi brands.',
+    interactiveElements: [
+      'Particle system mouse trail',
+      'Glowing button hover states',
+      'Scroll-triggered orbit animations',
+      'Audio toggle',
+      'WebGL canvas background'
+    ],
+    pexelsQuery: 'sci-fi space background',
+    colors: {
+      primary: '#00FFFF',
+      background: '#050510',
+      text: '#E2E8F0',
+      accent: '#A855F7',
+    },
+    fonts: {
+      heading: 'Audiowide, cursive',
+      body: 'Rajdhani, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/cosmic-sci-fi-game-landing.zip',
+  },
+  {
+    id: 10,
+    slug: 'editorial-magazine-brand-landing',
+    title: 'Editorial Magazine Brand Landing',
+    skill: 'editorial',
+    category: 'Landing Pages & Marketing',
+    description: 'Magazine-inspired layout with Gelasio serif, structured grids, high-contrast B&W, and elegant reading rhythm for publishing/media brands.',
+    interactiveElements: [
+      'Article preview cards with hover reveal',
+      'Newsletter subscription with inline success state',
+      'Issue archive filter',
+      'Reading progress bar',
+      'Font size adjuster'
+    ],
+    pexelsQuery: 'magazine editorial layout',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#1A1A1A',
+      accent: '#6B7280',
+    },
+    fonts: {
+      heading: 'Gelasio, serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/editorial-magazine-brand-landing.zip',
+  },
+  {
+    id: 11,
+    slug: 'enterprise-cloud-platform-landing',
+    title: 'Enterprise Cloud Platform Landing',
+    skill: 'enterprise',
+    category: 'Landing Pages & Marketing',
+    description: 'Dark-themed, cloud-platform aesthetic with IBM Plex Sans, glassmorphism panels, modular grids, and strong data hierarchy for DevOps/infrastructure products.',
+    interactiveElements: [
+      'Live metric sparklines',
+      'Collapsible sidebar nav',
+      'Theme density selector (comfortable/compact)',
+      'Command palette',
+      'Toast notification demo'
+    ],
+    pexelsQuery: 'cloud computing server room',
+    colors: {
+      primary: '#0066CC',
+      background: '#0C1426',
+      text: '#FFFFFF',
+      accent: '#00D4AA',
+    },
+    fonts: {
+      heading: 'IBM Plex Sans, system-ui, sans-serif',
+      body: 'IBM Plex Sans, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/enterprise-cloud-platform-landing.zip',
+  },
+  {
+    id: 12,
+    slug: 'expressive-brand-showcase-landing',
+    title: 'Expressive Brand Showcase Landing',
+    skill: 'expressive',
+    category: 'Landing Pages & Marketing',
+    description: 'Vibrant, personality-driven landing with IBM Plex Mono throughout, bold magenta/blue (#db2777/#2563eb), dynamic asymmetrical layouts for creative brands.',
+    interactiveElements: [
+      'Text scramble animation on headlines',
+      'Cursor-reactive gradient orbs',
+      'Staggered entrance animations',
+      'Work case study carousel',
+      'Contact form with character'
+    ],
+    pexelsQuery: 'creative brand studio',
+    colors: {
+      primary: '#DB2777',
+      background: '#FAFAFA',
+      text: '#111827',
+      accent: '#2563EB',
+    },
+    fonts: {
+      heading: 'IBM Plex Mono, monospace',
+      body: 'IBM Plex Mono, monospace',
+    },
+    downloadUrl: '/assets/expressive-brand-showcase-landing.zip',
+  },
+  {
+    id: 13,
+    slug: 'fantasy-game-universe-landing',
+    title: 'Fantasy Game Universe Landing',
+    skill: 'fantasy',
+    category: 'Landing Pages & Marketing',
+    description: 'Game-inspired epic landing with New Rocker display font, gold/blue palette (#FDC800/#0250CC), rich thematic textures for RPG/fantasy game marketing.',
+    interactiveElements: [
+      'Parallax layered background',
+      'Character class selector tabs',
+      'Animated stat bars',
+      'Trailer video modal',
+      'Pre-order CTA with pulse animation'
+    ],
+    pexelsQuery: 'fantasy game landscape',
+    colors: {
+      primary: '#FDC800',
+      background: '#0D0D1A',
+      text: '#F5F5F0',
+      accent: '#0250CC',
+    },
+    fonts: {
+      heading: 'New Rocker, cursive',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/fantasy-game-universe-landing.zip',
+  },
+  {
+    id: 14,
+    slug: 'fiction-childrens-book-landing',
+    title: 'Fiction Children\'s Book Landing',
+    skill: 'fiction',
+    category: 'Landing Pages & Marketing',
+    description: 'Playful cartoonesque landing with Cossette Texte, warm cream background, thick black outlines, saturated color blocks, and hand-drawn illustrations for kids\' content.',
+    interactiveElements: [
+      'Character hover animations',
+      'Page-flip book preview',
+      'Audio narration player',
+      'Age-range filter chips',
+      'Illustration gallery with lightbox'
+    ],
+    pexelsQuery: 'children book illustration',
+    colors: {
+      primary: '#FF6B35',
+      background: '#FDF8F0',
+      text: '#2D2D2D',
+      accent: '#00A8A8',
+    },
+    fonts: {
+      heading: 'Cossette Texte, serif',
+      body: 'Nunito, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/fiction-childrens-book-landing.zip',
+  },
+  {
+    id: 15,
+    slug: 'flat-design-app-landing',
+    title: 'Flat Design App Landing',
+    skill: 'flat',
+    category: 'Landing Pages & Marketing',
+    description: 'Two-dimensional minimalist landing with vibrant coral (#F2673C), Inter font, zero shadows/gradients, clean iconography for fast-loading app marketing.',
+    interactiveElements: [
+      'Icon state changes (default/hover/active)',
+      'Feature tab switching',
+      'Device frame carousel',
+      'Download button with platform detection',
+      'Scroll progress indicator'
+    ],
+    pexelsQuery: 'flat design mobile app',
+    colors: {
+      primary: '#F2673C',
+      background: '#FFFFFF',
+      text: '#1A1A1A',
+      accent: '#4ECDC4',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/flat-design-app-landing.zip',
+  },
+  {
+    id: 16,
+    slug: 'friendly-onboarding-landing',
+    title: 'Friendly Onboarding Landing',
+    skill: 'friendly',
+    category: 'Landing Pages & Marketing',
+    description: 'Approachable landing with Noto Serif Display, pastel palette (#F2D9DC/#D9F2D8), rounded elements, and soft whitespace for wellness/education products.',
+    interactiveElements: [
+      'Floating action button morph',
+      'Stepper progress indicator',
+      'Emoji reaction picker',
+      'Tooltip coach marks',
+      'Celebration confetti on completion'
+    ],
+    pexelsQuery: 'wellness lifestyle soft colors',
+    colors: {
+      primary: '#E87979',
+      background: '#FDFDFD',
+      text: '#374151',
+      accent: '#79E8A6',
+    },
+    fonts: {
+      heading: 'Noto Serif Display, serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/friendly-onboarding-landing.zip',
+  },
+  {
+    id: 17,
+    slug: 'futuristic-tech-product-landing',
+    title: 'Futuristic Tech Product Landing',
+    skill: 'futuristic',
+    category: 'Landing Pages & Marketing',
+    description: 'Forward-looking landing with Roboto/Audiowide, tech-inspired layouts, sleek innovation aesthetic for AI/hardware/deep-tech products.',
+    interactiveElements: [
+      'Holographic card flip',
+      'Spec sheet accordion',
+      '3D model viewer (Three.js)',
+      'Live code snippet terminal',
+      'Waitlist form with honeypot'
+    ],
+    pexelsQuery: 'futuristic technology interface',
+    colors: {
+      primary: '#00D4FF',
+      background: '#0A0F1A',
+      text: '#E5E7EB',
+      accent: '#FF6B35',
+    },
+    fonts: {
+      heading: 'Audiowide, cursive',
+      body: 'Roboto, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/futuristic-tech-product-landing.zip',
+  },
+  {
+    id: 18,
+    slug: 'glassmorphism-premium-landing',
+    title: 'Glassmorphism Premium Landing',
+    skill: 'glassmorphism',
+    category: 'Landing Pages & Marketing',
+    description: 'Frosted glass effect landing with translucent layers, blur backgrounds, luminous borders, Plus Jakarta Sans for premium/finance/design tools.',
+    interactiveElements: [
+      'Glass panel hover depth increase',
+      'Background blur intensity slider',
+      'Pricing card tilt',
+      'Feature highlight spotlight',
+      'Cookie consent banner'
+    ],
+    pexelsQuery: 'premium glass office interior',
+    colors: {
+      primary: '#6366F1',
+      background: '#F3F4F6',
+      text: '#111827',
+      accent: '#F59E0B',
+    },
+    fonts: {
+      heading: 'Plus Jakarta Sans, system-ui, sans-serif',
+      body: 'Plus Jakarta Sans, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/glassmorphism-premium-landing.zip',
+  },
+
+  // === DASHBOARDS & DATA (12) ===
+  {
+    id: 19,
+    slug: 'enterprise-analytics-dashboard',
+    title: 'Enterprise Analytics Dashboard',
+    skill: 'enterprise',
+    category: 'Dashboards & Data',
+    description: 'Dark-themed productivity dashboard with modular grid, glass panels, IBM Plex Sans, real-time metrics, and strong visual hierarchy for ops/engineering teams.',
+    interactiveElements: [
+      'Time-range picker',
+      'Live data websocket indicator',
+      'Draggable widget grid',
+      'Drill-down modal',
+      'Keyboard shortcuts panel',
+      'Export dropdown'
+    ],
+    pexelsQuery: 'analytics dashboard dark mode',
+    colors: {
+      primary: '#0066CC',
+      background: '#0C1426',
+      text: '#FFFFFF',
+      accent: '#00D4AA',
+    },
+    fonts: {
+      heading: 'IBM Plex Sans, system-ui, sans-serif',
+      body: 'IBM Plex Sans, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/enterprise-analytics-dashboard.zip',
+  },
+  {
+    id: 20,
+    slug: 'ant-design-data-dense-admin',
+    title: 'Ant Design Data-Dense Admin',
+    skill: 'ant',
+    category: 'Dashboards & Data',
+    description: 'Enterprise-focused admin panel with Plus Jakarta Sans, structured tables, dense data grids, and Ant Design patterns for complex B2B applications.',
+    interactiveElements: [
+      'Column visibility toggle',
+      'Row expansion',
+      'Inline editing',
+      'Filter drawer',
+      'Pagination controls',
+      'Bulk action toolbar',
+      'Saved views dropdown'
+    ],
+    pexelsQuery: 'admin dashboard data table',
+    colors: {
+      primary: '#1890FF',
+      background: '#F0F2F5',
+      text: '#1F1F1F',
+      accent: '#52C41A',
+    },
+    fonts: {
+      heading: 'Plus Jakarta Sans, system-ui, sans-serif',
+      body: 'Plus Jakarta Sans, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/ant-design-data-dense-admin.zip',
+  },
+  {
+    id: 21,
+    slug: 'bento-metrics-dashboard',
+    title: 'Bento Metrics Dashboard',
+    skill: 'bento',
+    category: 'Dashboards & Data',
+    description: 'Scannable dashboard using bento-grid cards of varying sizes for KPIs, charts, and alerts. Soft peach palette for approachable analytics.',
+    interactiveElements: [
+      'Card resize handles',
+      'Chart type selector',
+      'Date range sync across widgets',
+      'Anomaly highlight pulse',
+      'Full-screen widget mode'
+    ],
+    pexelsQuery: 'metrics dashboard bento grid',
+    colors: {
+      primary: '#FAD4C0',
+      background: '#FFF5E6',
+      text: '#2D2D2D',
+      accent: '#FF8C66',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/bento-metrics-dashboard.zip',
+  },
+  {
+    id: 22,
+    slug: 'clean-analytics-overview',
+    title: 'Clean Analytics Overview',
+    skill: 'clean',
+    category: 'Dashboards & Data',
+    description: 'Minimalist dashboard with ample whitespace, Roboto/Poppins, single blue accent, focused on clarity over density for executive summaries.',
+    interactiveElements: [
+      'Metric card hover detail',
+      'Trend sparkline toggle',
+      'Comparison period selector',
+      'PDF export',
+      'Scheduled email modal'
+    ],
+    pexelsQuery: 'clean analytics dashboard',
+    colors: {
+      primary: '#3B82F6',
+      background: '#FFFFFF',
+      text: '#1F2937',
+      accent: '#60A5FA',
+    },
+    fonts: {
+      heading: 'Poppins, system-ui, sans-serif',
+      body: 'Roboto, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/clean-analytics-overview.zip',
+  },
+  {
+    id: 23,
+    slug: 'corporate-business-intelligence',
+    title: 'Corporate Business Intelligence',
+    skill: 'corporate',
+    category: 'Dashboards & Data',
+    description: 'Professional BI dashboard with structured grids, Open Sans, brand-aligned colors, AI-insight callouts for leadership reporting.',
+    interactiveElements: [
+      'Natural language query input',
+      'Insight card dismiss',
+      'Drill-through navigation',
+      'Annotation layer',
+      'Sharing permissions modal'
+    ],
+    pexelsQuery: 'business intelligence dashboard',
+    colors: {
+      primary: '#1E40AF',
+      background: '#F8FAFC',
+      text: '#1E293B',
+      accent: '#3B82F6',
+    },
+    fonts: {
+      heading: 'Open Sans, system-ui, sans-serif',
+      body: 'Open Sans, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/corporate-business-intelligence.zip',
+  },
+  {
+    id: 24,
+    slug: 'dark-mode-developer-dashboard',
+    title: 'Dark Mode Developer Dashboard',
+    skill: 'contemporary',
+    category: 'Dashboards & Data',
+    description: 'Modern dev-focused dashboard with bento layout, Jost font, dark mode default, magenta accents for API/infrastructure monitoring.',
+    interactiveElements: [
+      'Log stream tail/follow',
+      'Endpoint health badges',
+      'Deployment timeline',
+      'Incident acknowledge',
+      'Command palette for actions'
+    ],
+    pexelsQuery: 'developer dashboard monitoring',
+    colors: {
+      primary: '#C800DF',
+      background: '#0F172A',
+      text: '#F8FAFC',
+      accent: '#F472B6',
+    },
+    fonts: {
+      heading: 'Jost, system-ui, sans-serif',
+      body: 'Jost, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/dark-mode-developer-dashboard.zip',
+  },
+  {
+    id: 25,
+    slug: 'editorial-content-analytics',
+    title: 'Editorial Content Analytics',
+    skill: 'editorial',
+    category: 'Dashboards & Data',
+    description: 'Magazine-style content performance dashboard with Gelasio serif, elegant grids, reading-time metrics for publishers/editors.',
+    interactiveElements: [
+      'Article performance comparison toggle',
+      'Author filter',
+      'Topic cluster visualization',
+      'Engagement heatmap',
+      'Content calendar view'
+    ],
+    pexelsQuery: 'content analytics dashboard',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#1A1A1A',
+      accent: '#6B7280',
+    },
+    fonts: {
+      heading: 'Gelasio, serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/editorial-content-analytics.zip',
+  },
+  {
+    id: 26,
+    slug: 'expressive-realtime-monitoring',
+    title: 'Expressive Real-Time Monitoring',
+    skill: 'expressive',
+    category: 'Dashboards & Data',
+    description: 'Vibrant monitoring dashboard with IBM Plex Mono, bold magenta/blue, dynamic layouts for creative/ops teams wanting personality.',
+    interactiveElements: [
+      'Live pulse indicators',
+      'Threshold breach animations',
+      'Custom alert rule builder',
+      'Incident timeline',
+      'Team status avatars'
+    ],
+    pexelsQuery: 'real-time monitoring dashboard',
+    colors: {
+      primary: '#DB2777',
+      background: '#FAFAFA',
+      text: '#111827',
+      accent: '#2563EB',
+    },
+    fonts: {
+      heading: 'IBM Plex Mono, monospace',
+      body: 'IBM Plex Mono, monospace',
+    },
+    downloadUrl: '/assets/expressive-realtime-monitoring.zip',
+  },
+  {
+    id: 27,
+    slug: 'flat-design-kpi-dashboard',
+    title: 'Flat Design KPI Dashboard',
+    skill: 'flat',
+    category: 'Dashboards & Data',
+    description: '2D minimalist KPI board with coral accent, zero depth effects, clean iconography for fast rendering on large displays.',
+    interactiveElements: [
+      'Metric drill-down accordion',
+      'Goal progress rings',
+      'Comparison chips',
+      'Fullscreen TV mode',
+      'Auto-refresh toggle'
+    ],
+    pexelsQuery: 'KPI dashboard flat design',
+    colors: {
+      primary: '#F2673C',
+      background: '#FFFFFF',
+      text: '#1A1A1A',
+      accent: '#4ECDC4',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/flat-design-kpi-dashboard.zip',
+  },
+  {
+    id: 28,
+    slug: 'futuristic-sci-fi-command-center',
+    title: 'Futuristic Sci-Fi Command Center',
+    skill: 'futuristic',
+    category: 'Dashboards & Data',
+    description: 'Tech-forward command center with Audiowide displays, holographic data viz, edge-to-edge layouts for IoT/space/defense monitoring.',
+    interactiveElements: [
+      'Globe data visualization',
+      'Alert priority matrix',
+      'Comms log stream',
+      'System health topology map',
+      'Voice command indicator'
+    ],
+    pexelsQuery: 'futuristic command center',
+    colors: {
+      primary: '#00D4FF',
+      background: '#0A0F1A',
+      text: '#E5E7EB',
+      accent: '#FF6B35',
+    },
+    fonts: {
+      heading: 'Audiowide, cursive',
+      body: 'Roboto, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/futuristic-sci-fi-command-center.zip',
+  },
+  {
+    id: 29,
+    slug: 'gradient-revenue-dashboard',
+    title: 'Gradient Revenue Dashboard',
+    skill: 'gradient',
+    category: 'Dashboards & Data',
+    description: 'Gradient-rich financial dashboard with smooth color transitions, Montserrat/Space Grotesk, visual depth for SaaS metrics and revenue tracking.',
+    interactiveElements: [
+      'Gradient area chart hover details',
+      'Cohort analysis tabs',
+      'Forecast slider',
+      'Currency switcher',
+      'Board-ready export'
+    ],
+    pexelsQuery: 'financial dashboard charts',
+    colors: {
+      primary: '#8B5CF6',
+      background: '#F8FAFC',
+      text: '#1E293B',
+      accent: '#06B6D4',
+    },
+    fonts: {
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Montserrat, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/gradient-revenue-dashboard.zip',
+  },
+  {
+    id: 30,
+    slug: 'immersive-data-storytelling',
+    title: 'Immersive Data Storytelling',
+    skill: 'immersive',
+    category: 'Dashboards & Data',
+    description: 'Exhibit-style data narrative on deep green canvas, Oswald display, white cards with hard shadows, gamified exploration for public data.',
+    interactiveElements: [
+      'Scrollytelling chapters',
+      'Interactive chart annotations',
+      'Perspective zoom',
+      'Decision point branches',
+      'Shareable story links'
+    ],
+    pexelsQuery: 'data visualization storytelling',
+    colors: {
+      primary: '#FFFFFF',
+      background: '#064E3B',
+      text: '#FFFFFF',
+      accent: '#FCD34D',
+    },
+    fonts: {
+      heading: 'Oswald, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/immersive-data-storytelling.zip',
+  },
+
+  // === APPLICATIONS & TOOLS (16) ===
+  {
+    id: 31,
+    slug: 'agentic-ai-assistant-interface',
+    title: 'Agentic AI Assistant Interface',
+    skill: 'agentic',
+    category: 'Applications & Tools',
+    description: 'Conversational AI workspace with minimal chrome, delegated task flows, Playfair Display, warm orange accents for agentic workflows.',
+    interactiveElements: [
+      'Multi-turn conversation thread',
+      'Tool invocation chips',
+      'Artifact preview pane',
+      'Branching history tree',
+      'Voice input toggle'
+    ],
+    pexelsQuery: 'AI assistant chat interface',
+    colors: {
+      primary: '#FF5701',
+      background: '#FFF8F0',
+      text: '#1A1A2E',
+      accent: '#FF8C42',
+    },
+    fonts: {
+      heading: 'Playfair Display, serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/agentic-ai-assistant-interface.zip',
+  },
+  {
+    id: 32,
+    slug: 'basic-digital-publication-editor',
+    title: 'Basic Digital Publication Editor',
+    skill: 'basic',
+    category: 'Applications & Tools',
+    description: 'Print-inspired editor for books/magazines/reports with Nunito/Oswald, editorial grids, expressive typography controls.',
+    interactiveElements: [
+      'Page layout presets',
+      'Typography scale slider',
+      'Footnote manager',
+      'TOC auto-generate',
+      'Print preview with bleed marks'
+    ],
+    pexelsQuery: 'digital publishing editor',
+    colors: {
+      primary: '#3B82F6',
+      background: '#FAFAFA',
+      text: '#1F2937',
+      accent: '#8B5CF6',
+    },
+    fonts: {
+      heading: 'Oswald, system-ui, sans-serif',
+      body: 'Nunito, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/basic-digital-publication-editor.zip',
+  },
+  {
+    id: 33,
+    slug: 'bold-marketing-campaign-builder',
+    title: 'Bold Marketing Campaign Builder',
+    skill: 'bold',
+    category: 'Applications & Tools',
+    description: 'High-impact campaign creator with Archivo Black, heavyweight typography, high-contrast colors for bold brand messaging.',
+    interactiveElements: [
+      'Headline weight/spacing controls',
+      'Color palette lock',
+      'Asset drop zone',
+      'Responsive preview devices',
+      'Brand guideline checker'
+    ],
+    pexelsQuery: 'marketing campaign design',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#000000',
+      accent: '#FF0000',
+    },
+    fonts: {
+      heading: 'Archivo Black, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/bold-marketing-campaign-builder.zip',
+  },
+  {
+    id: 34,
+    slug: 'brutalist-raw-wireframe-tool',
+    title: 'Brutalist Raw Wireframe Tool',
+    skill: 'brutalism',
+    category: 'Applications & Tools',
+    description: 'Anti-design wireframing tool with Darker Grotesque, raw concrete aesthetic, jarring layouts for brutalist design exploration.',
+    interactiveElements: [
+      'Grid snap toggle',
+      'Exposed baseline grid',
+      'Component library raw HTML',
+      'No-border mode',
+      'Print stylesheet export'
+    ],
+    pexelsQuery: 'brutalist architecture concrete',
+    colors: {
+      primary: '#000000',
+      background: '#E8E8E8',
+      text: '#000000',
+      accent: '#FF0000',
+    },
+    fonts: {
+      heading: 'Darker Grotesque, sans-serif',
+      body: 'Darker Grotesque, sans-serif',
+    },
+    downloadUrl: '/assets/brutalist-raw-wireframe-tool.zip',
+  },
+  {
+    id: 35,
+    slug: 'claymorphism-ui-kit-builder',
+    title: 'Claymorphism UI Kit Builder',
+    skill: 'claymorphism',
+    category: 'Applications & Tools',
+    description: 'Soft 3D puffy component builder with Montserrat/Poppins, clay-like shadows, rounded everything for playful design systems.',
+    interactiveElements: [
+      'Puff depth slider',
+      'Clay color picker',
+      'Inner shadow direction',
+      'Component state gallery',
+      'CSS/React code export'
+    ],
+    pexelsQuery: 'claymorphism 3D UI elements',
+    colors: {
+      primary: '#E0E7FF',
+      background: '#F3F4F6',
+      text: '#1F2937',
+      accent: '#A78BFA',
+    },
+    fonts: {
+      heading: 'Montserrat, system-ui, sans-serif',
+      body: 'Poppins, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/claymorphism-ui-kit-builder.zip',
+  },
+  {
+    id: 36,
+    slug: 'codex-minimal-code-editor',
+    title: 'Codex Minimal Code Editor',
+    skill: 'codex',
+    category: 'Applications & Tools',
+    description: 'Radically minimal edge-to-edge code editor with Open Sans, pure black/white, pill-shaped controls, no shadows for distraction-free coding.',
+    interactiveElements: [
+      'Command palette (⌘K)',
+      'Language mode pills',
+      'Minimap toggle',
+      'Zen mode focus',
+      'Git inline blame',
+      'Split editor'
+    ],
+    pexelsQuery: 'minimal code editor',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#000000',
+      accent: '#000000',
+    },
+    fonts: {
+      heading: 'Open Sans, system-ui, sans-serif',
+      body: 'JetBrains Mono, monospace',
+    },
+    downloadUrl: '/assets/codex-minimal-code-editor.zip',
+  },
+  {
+    id: 37,
+    slug: 'contemporary-developer-portal',
+    title: 'Contemporary Developer Portal',
+    skill: 'contemporary',
+    category: 'Applications & Tools',
+    description: 'Modern docs/API portal with bento layout, Jost font, dark mode, AI-powered search for developer experience.',
+    interactiveElements: [
+      'Live API explorer',
+      'Code playground',
+      'Version switcher',
+      'Copy code buttons',
+      'Feedback widget',
+      'Changelog timeline'
+    ],
+    pexelsQuery: 'developer documentation portal',
+    colors: {
+      primary: '#C800DF',
+      background: '#0F172A',
+      text: '#F8FAFC',
+      accent: '#F472B6',
+    },
+    fonts: {
+      heading: 'Jost, system-ui, sans-serif',
+      body: 'Jost, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/contemporary-developer-portal.zip',
+  },
+  {
+    id: 38,
+    slug: 'cosmic-game-level-editor',
+    title: 'Cosmic Game Level Editor',
+    skill: 'cosmic',
+    category: 'Applications & Tools',
+    description: 'Sci-fi level editor with Audiowide, neon accents, dark canvas, spatial tools for game dev/creative coding.',
+    interactiveElements: [
+      'Node-based logic graph',
+      'Particle emitter preview',
+      'Shader live coding',
+      'Asset palette',
+      'Playtest launch'
+    ],
+    pexelsQuery: 'game level editor',
+    colors: {
+      primary: '#00FFFF',
+      background: '#050510',
+      text: '#E2E8F0',
+      accent: '#A855F7',
+    },
+    fonts: {
+      heading: 'Audiowide, cursive',
+      body: 'Rajdhani, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/cosmic-game-level-editor.zip',
+  },
+  {
+    id: 39,
+    slug: 'creative-design-system-playground',
+    title: 'Creative Design System Playground',
+    skill: 'creative',
+    category: 'Applications & Tools',
+    description: 'Playful component playground with Bangers, bold graphics, asymmetric layouts for design system experimentation.',
+    interactiveElements: [
+      'Theme generator',
+      'Component state matrix',
+      'Token visualizer',
+      'Accessibility auditor',
+      'Storybook integration'
+    ],
+    pexelsQuery: 'design system components',
+    colors: {
+      primary: '#7C3AED',
+      background: '#FAFAFA',
+      text: '#111827',
+      accent: '#F472B6',
+    },
+    fonts: {
+      heading: 'Bangers, cursive',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/creative-design-system-playground.zip',
+  },
+  {
+    id: 40,
+    slug: 'dithered-retro-image-processor',
+    title: 'Dithered Retro Image Processor',
+    skill: 'dithered',
+    category: 'Applications & Tools',
+    description: 'Dot-pattern image processor with Open Sans/Space Grotesk, limited palette simulation for nostalgic/artistic effects.',
+    interactiveElements: [
+      'Palette selector (CGA/EGA/GameBoy/custom)',
+      'Dither algorithm tabs',
+      'Resolution slider',
+      'Before/after compare',
+      'Batch export'
+    ],
+    pexelsQuery: 'retro pixel art',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#000000',
+      accent: '#FFFFFF',
+    },
+    fonts: {
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Open Sans, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/dithered-retro-image-processor.zip',
+  },
+  {
+    id: 41,
+    slug: 'doodle-sketch-annotation-tool',
+    title: 'Doodle Sketch Annotation Tool',
+    skill: 'doodle',
+    category: 'Applications & Tools',
+    description: 'Hand-drawn annotation tool with Delius Swash Caps, imperfect lines, sketch-like feel for design reviews/teaching.',
+    interactiveElements: [
+      'Brush pressure simulation',
+      'Sticky note doodles',
+      'Arrow/pointer shapes',
+      'Export as sketch PNG',
+      'Collaborative cursors'
+    ],
+    pexelsQuery: 'hand drawn sketch',
+    colors: {
+      primary: '#8B4513',
+      background: '#F5F0E1',
+      text: '#3D2B1F',
+      accent: '#D4A574',
+    },
+    fonts: {
+      heading: 'Delius Swash Caps, cursive',
+      body: 'Patrick Hand, cursive',
+    },
+    downloadUrl: '/assets/doodle-sketch-annotation-tool.zip',
+  },
+  {
+    id: 42,
+    slug: 'dramatic-presentation-builder',
+    title: 'Dramatic Presentation Builder',
+    skill: 'dramatic',
+    category: 'Applications & Tools',
+    description: 'Theatrical slide builder with Outfit 400/900 only, high-contrast, unconventional layouts for impactful presentations.',
+    interactiveElements: [
+      'Slide transition director',
+      'Focus spotlight',
+      'Speaker notes teleprompter',
+      'Remote control link',
+      'Audience poll embed'
+    ],
+    pexelsQuery: 'presentation design slides',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#000000',
+      accent: '#FF0000',
+    },
+    fonts: {
+      heading: 'Outfit, system-ui, sans-serif',
+      body: 'Outfit, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/dramatic-presentation-builder.zip',
+  },
+  {
+    id: 43,
+    slug: 'editorial-longform-writer',
+    title: 'Editorial Long-Form Writer',
+    skill: 'editorial',
+    category: 'Applications & Tools',
+    description: 'Magazine-style writing environment with Gelasio, structured grids, reading-focused UI for journalists/authors.',
+    interactiveElements: [
+      'Outline navigator',
+      'Figure/table manager',
+      'Citation inserter',
+      'Readability score',
+      'Co-author cursors',
+      'Version history'
+    ],
+    pexelsQuery: 'writing editor longform',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#1A1A1A',
+      accent: '#6B7280',
+    },
+    fonts: {
+      heading: 'Gelasio, serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/editorial-longform-writer.zip',
+  },
+  {
+    id: 44,
+    slug: 'expressive-form-builder',
+    title: 'Expressive Form Builder',
+    skill: 'expressive',
+    category: 'Applications & Tools',
+    description: 'Vibrant form creator with IBM Plex Mono, bold colors, dynamic layouts for engaging surveys/onboarding.',
+    interactiveElements: [
+      'Drag-drop field canvas',
+      'Conditional logic visualizer',
+      'Progress animation styles',
+      'Submission celebration',
+      'Analytics dashboard'
+    ],
+    pexelsQuery: 'form builder interface',
+    colors: {
+      primary: '#DB2777',
+      background: '#FAFAFA',
+      text: '#111827',
+      accent: '#2563EB',
+    },
+    fonts: {
+      heading: 'IBM Plex Mono, monospace',
+      body: 'IBM Plex Mono, monospace',
+    },
+    downloadUrl: '/assets/expressive-form-builder.zip',
+  },
+  {
+    id: 45,
+    slug: 'fantasy-character-creator',
+    title: 'Fantasy Character Creator',
+    skill: 'fantasy',
+    category: 'Applications & Tools',
+    description: 'Epic character builder with New Rocker, gold/blue palette, rich thematic UI for RPG character creation.',
+    interactiveElements: [
+      'Paper doll equipment slots',
+      'Stat allocation points',
+      'Portrait generator',
+      'Backstory writer',
+      'Export character sheet'
+    ],
+    pexelsQuery: 'fantasy character creation',
+    colors: {
+      primary: '#FDC800',
+      background: '#0D0D1A',
+      text: '#F5F5F0',
+      accent: '#0250CC',
+    },
+    fonts: {
+      heading: 'New Rocker, cursive',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/fantasy-character-creator.zip',
+  },
+  {
+    id: 46,
+    slug: 'fiction-storybook-app',
+    title: 'Fiction Storybook App',
+    skill: 'fiction',
+    category: 'Applications & Tools',
+    description: 'Children\'s book reader with Cossette Texte, cream pages, thick outlines, hand-drawn illustrations, audio narration.',
+    interactiveElements: [
+      'Page turn animation',
+      'Tap-to-hear words',
+      'Illustration zoom',
+      'Reading progress map',
+      'Parent dashboard',
+      'Bookmark ribbon'
+    ],
+    pexelsQuery: 'children book reading',
+    colors: {
+      primary: '#FF6B35',
+      background: '#FDF8F0',
+      text: '#2D2D2D',
+      accent: '#00A8A8',
+    },
+    fonts: {
+      heading: 'Cossette Texte, serif',
+      body: 'Nunito, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/fiction-storybook-app.zip',
+  },
+  {
+    id: 47,
+    slug: 'flat-design-icon-editor',
+    title: 'Flat Design Icon Editor',
+    skill: 'flat',
+    category: 'Applications & Tools',
+    description: '2D icon editor with Inter, vibrant coral, no shadows/gradients, clean vector tools for icon set creation.',
+    interactiveElements: [
+      'Grid snap',
+      'Boolean operations',
+      'Stroke width slider',
+      'Export sizes preset',
+      'Icon font generator',
+      'Figma plugin sync'
+    ],
+    pexelsQuery: 'icon design flat',
+    colors: {
+      primary: '#F2673C',
+      background: '#FFFFFF',
+      text: '#1A1A1A',
+      accent: '#4ECDC4',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/flat-design-icon-editor.zip',
+  },
+  {
+    id: 48,
+    slug: 'friendly-habit-tracker',
+    title: 'Friendly Habit Tracker',
+    skill: 'friendly',
+    category: 'Applications & Tools',
+    description: 'Approachable habit app with Noto Serif Display, pastels, rounded cards, soft whitespace for wellness tracking.',
+    interactiveElements: [
+      'Habit streak rings',
+      'Mood emoji logger',
+      'Flexible schedule',
+      'Widget preview',
+      'Community challenges',
+      'Celebration animations'
+    ],
+    pexelsQuery: 'habit tracker wellness',
+    colors: {
+      primary: '#E87979',
+      background: '#FDFDFD',
+      text: '#374151',
+      accent: '#79E8A6',
+    },
+    fonts: {
+      heading: 'Noto Serif Display, serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/friendly-habit-tracker.zip',
+  },
+  {
+    id: 49,
+    slug: 'futuristic-terminal-dashboard',
+    title: 'Futuristic Terminal Dashboard',
+    skill: 'futuristic',
+    category: 'Applications & Tools',
+    description: 'Tech-terminal UI with Roboto/Audiowide, command palette, live data streams for devops/engineering workflows.',
+    interactiveElements: [
+      'Command history',
+      'Alias manager',
+      'Split panes',
+      'Theme variants (matrix/amber/green)',
+      'SSH connection cards'
+    ],
+    pexelsQuery: 'terminal command line',
+    colors: {
+      primary: '#00D4FF',
+      background: '#0A0F1A',
+      text: '#E5E7EB',
+      accent: '#FF6B35',
+    },
+    fonts: {
+      heading: 'Audiowide, cursive',
+      body: 'Roboto, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/futuristic-terminal-dashboard.zip',
+  },
+  {
+    id: 50,
+    slug: 'glassmorphism-design-token-manager',
+    title: 'Glassmorphism Design Token Manager',
+    skill: 'glassmorphism',
+    category: 'Applications & Tools',
+    description: 'Frosted glass token manager with Plus Jakarta Sans, translucent layers, blur controls for design system governance.',
+    interactiveElements: [
+      'Token search/filter',
+      'Contrast checker',
+      'Alias mapping',
+      'PR preview',
+      'Figma sync',
+      'Export formats (JSON/CSS/iOS/Android)'
+    ],
+    pexelsQuery: 'design tokens management',
+    colors: {
+      primary: '#6366F1',
+      background: '#F3F4F6',
+      text: '#111827',
+      accent: '#F59E0B',
+    },
+    fonts: {
+      heading: 'Plus Jakarta Sans, system-ui, sans-serif',
+      body: 'Plus Jakarta Sans, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/glassmorphism-design-token-manager.zip',
+  },
+  {
+    id: 51,
+    slug: 'gradient-color-palette-generator',
+    title: 'Gradient Color Palette Generator',
+    skill: 'gradient',
+    category: 'Applications & Tools',
+    description: 'Smooth transition palette tool with Montserrat/Space Grotesk, visual depth, gradient mesh for brand color exploration.',
+    interactiveElements: [
+      'Mesh point drag',
+      'Harmony rules (triadic/analogous)',
+      'Accessibility audit',
+      'Export tokens',
+      'CSS gradient snippets'
+    ],
+    pexelsQuery: 'color gradient palette',
+    colors: {
+      primary: '#8B5CF6',
+      background: '#F8FAFC',
+      text: '#1E293B',
+      accent: '#06B6D4',
+    },
+    fonts: {
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Montserrat, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/gradient-color-palette-generator.zip',
+  },
+  {
+    id: 52,
+    slug: 'immersive-3d-model-viewer',
+    title: 'Immersive 3D Model Viewer',
+    skill: 'immersive',
+    category: 'Applications & Tools',
+    description: 'Exhibit-style 3D viewer on deep green canvas, Oswald, white cards with hard shadows for product showcase.',
+    interactiveElements: [
+      'Orbit/pan/zoom controls',
+      'Exploded view',
+      'Material picker',
+      'Annotation pins',
+      'AR quick look',
+      'Embed code generator'
+    ],
+    pexelsQuery: '3D product viewer',
+    colors: {
+      primary: '#FFFFFF',
+      background: '#064E3B',
+      text: '#FFFFFF',
+      accent: '#FCD34D',
+    },
+    fonts: {
+      heading: 'Oswald, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/immersive-3d-model-viewer.zip',
+  },
+  {
+    id: 53,
+    slug: 'impeccable-editorial-poster-maker',
+    title: 'Impeccable Editorial Poster Maker',
+    skill: 'impeccable',
+    category: 'Applications & Tools',
+    description: 'Warm editorial-poster creator with Chakra Petch, cream/burnt orange sections, amber brand for graphic design.',
+    interactiveElements: [
+      'Asymmetric grid snap',
+      'Typography pairing',
+      'Color block generator',
+      'Print bleed/trim',
+      'Social crop presets'
+    ],
+    pexelsQuery: 'editorial poster design',
+    colors: {
+      primary: '#CC5500',
+      background: '#FDF8F0',
+      text: '#1A1A1A',
+      accent: '#FFB800',
+    },
+    fonts: {
+      heading: 'Chakra Petch, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/impeccable-editorial-poster-maker.zip',
+  },
+  {
+    id: 54,
+    slug: 'levels-hierarchical-outliner',
+    title: 'Levels Hierarchical Outliner',
+    skill: 'levels',
+    category: 'Applications & Tools',
+    description: 'Multi-level outliner with clear visual depth, progressive disclosure for complex planning/writing.',
+    interactiveElements: [
+      'Collapse/expand all',
+      'Drag-drop reorder',
+      'Focus mode (dim siblings)',
+      'Hoist branch',
+      'Markdown import/export'
+    ],
+    pexelsQuery: 'outliner mind map',
+    colors: {
+      primary: '#3B82F6',
+      background: '#FFFFFF',
+      text: '#1F2937',
+      accent: '#8B5CF6',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/levels-hierarchical-outliner.zip',
+  },
+  {
+    id: 55,
+    slug: 'lingo-microcopy-manager',
+    title: 'Lingo Microcopy Manager',
+    skill: 'lingo',
+    category: 'Applications & Tools',
+    description: 'UX writing tool for consistent microcopy, tone guidelines, component-text mapping for design systems.',
+    interactiveElements: [
+      'Component-text linking',
+      'Tone slider (formal→casual)',
+      'Variant A/B',
+      'Translation keys',
+      'Figma content sync'
+    ],
+    pexelsQuery: 'UX writing content design',
+    colors: {
+      primary: '#8B5CF6',
+      background: '#FAFAFA',
+      text: '#1F2937',
+      accent: '#06B6D4',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/lingo-microcopy-manager.zip',
+  },
+  {
+    id: 56,
+    slug: 'material-design-component-library',
+    title: 'Material Design Component Library',
+    skill: 'material',
+    category: 'Applications & Tools',
+    description: 'Material 3 component reference with elevation, motion, shape tokens for Android/cross-platform teams.',
+    interactiveElements: [
+      'Theme builder (dynamic color)',
+      'Component state gallery',
+      'Density selector',
+      'RTL preview',
+      'Compose/Flutter code'
+    ],
+    pexelsQuery: 'material design components',
+    colors: {
+      primary: '#6750A4',
+      background: '#FEF7FF',
+      text: '#1D1B20',
+      accent: '#006874',
+    },
+    fonts: {
+      heading: 'Roboto, system-ui, sans-serif',
+      body: 'Roboto, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/material-design-component-library.zip',
+  },
+  {
+    id: 57,
+    slug: 'matrix-data-grid-pro',
+    title: 'Matrix Data Grid Pro',
+    skill: 'matrix',
+    category: 'Applications & Tools',
+    description: 'Dense spreadsheet-like grid with virtual scrolling, pivot, formula bar for analytical power users.',
+    interactiveElements: [
+      'Column pin/freeze',
+      'Filter rows',
+      'Conditional formatting',
+      'Chart sparklines',
+      'Keyboard navigation',
+      'Copy-paste Excel compat'
+    ],
+    pexelsQuery: 'data grid spreadsheet',
+    colors: {
+      primary: '#0066CC',
+      background: '#FFFFFF',
+      text: '#1F1F1F',
+      accent: '#00C853',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'JetBrains Mono, monospace',
+    },
+    downloadUrl: '/assets/matrix-data-grid-pro.zip',
+  },
+  {
+    id: 58,
+    slug: 'minimal-todo-cli-style',
+    title: 'Minimal Todo CLI-Style',
+    skill: 'minimal',
+    category: 'Applications & Tools',
+    description: 'Extreme minimal task app — text-only, keyboard-driven, zero chrome for focus purists.',
+    interactiveElements: [
+      'Vim-style keys',
+      'Natural language dates',
+      'Project tags',
+      'Priority flags',
+      'Plain text sync',
+      'Terminal theme'
+    ],
+    pexelsQuery: 'minimal terminal interface',
+    colors: {
+      primary: '#00FF00',
+      background: '#000000',
+      text: '#00FF00',
+      accent: '#FFFFFF',
+    },
+    fonts: {
+      heading: 'JetBrains Mono, monospace',
+      body: 'JetBrains Mono, monospace',
+    },
+    downloadUrl: '/assets/minimal-todo-cli-style.zip',
+  },
+  {
+    id: 59,
+    slug: 'modern-component-storybook',
+    title: 'Modern Component Storybook',
+    skill: 'modern',
+    category: 'Applications & Tools',
+    description: 'Contemporary component docs with interactive playground, design token reference, accessibility notes.',
+    interactiveElements: [
+      'Props table with controls',
+      'Source view',
+      'Test results',
+      'A11y audit',
+      'Figma link',
+      'Version history'
+    ],
+    pexelsQuery: 'component documentation',
+    colors: {
+      primary: '#6366F1',
+      background: '#FFFFFF',
+      text: '#111827',
+      accent: '#F59E0B',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/modern-component-storybook.zip',
+  },
+  {
+    id: 60,
+    slug: 'mono-developer-portfolio',
+    title: 'Mono Developer Portfolio',
+    skill: 'mono',
+    category: 'Applications & Tools',
+    description: 'Monospace-only portfolio with single typeface, code aesthetic for developers/technical writers.',
+    interactiveElements: [
+      'Terminal intro animation',
+      'Project terminal cards',
+      'Skill tag cloud',
+      'Blog as markdown files',
+      'Theme variants'
+    ],
+    pexelsQuery: 'developer portfolio code',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#000000',
+      accent: '#000000',
+    },
+    fonts: {
+      heading: 'JetBrains Mono, monospace',
+      body: 'JetBrains Mono, monospace',
+    },
+    downloadUrl: '/assets/mono-developer-portfolio.zip',
+  },
+  {
+    id: 61,
+    slug: 'neobrutalism-admin-panel',
+    title: 'Neobrutalism Admin Panel',
+    skill: 'neobrutalism',
+    category: 'Applications & Tools',
+    description: 'Raw, bold admin with thick borders, system fonts, high contrast, no border-radius for brutalist web apps.',
+    interactiveElements: [
+      'Table row actions',
+      'Command bar',
+      'Raw HTML view',
+      'Print stylesheet',
+      'Offline-first sync'
+    ],
+    pexelsQuery: 'brutalist web design',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#000000',
+      accent: '#FFFF00',
+    },
+    fonts: {
+      heading: 'system-ui, sans-serif',
+      body: 'system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/neobrutalism-admin-panel.zip',
+  },
+  {
+    id: 62,
+    slug: 'neon-cyberpunk-dashboard',
+    title: 'Neon Cyberpunk Dashboard',
+    skill: 'neon',
+    category: 'Applications & Tools',
+    description: 'Glowing neon cyberpunk UI with dark background, electric colors, scanlines for gaming/streaming tools.',
+    interactiveElements: [
+      'Glitch text effect',
+      'Scanline toggle',
+      'Audio visualizer',
+      'Stream deck integration',
+      'RGB sync'
+    ],
+    pexelsQuery: 'cyberpunk neon interface',
+    colors: {
+      primary: '#00FFFF',
+      background: '#0A0A0F',
+      text: '#00FFFF',
+      accent: '#FF00FF',
+    },
+    fonts: {
+      heading: 'Orbitron, system-ui, sans-serif',
+      body: 'Rajdhani, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/neon-cyberpunk-dashboard.zip',
+  },
+  {
+    id: 63,
+    slug: 'neumorphism-soft-calculator',
+    title: 'Neumorphism Soft Calculator',
+    skill: 'neumorphism',
+    category: 'Applications & Tools',
+    description: 'Soft extruded calculator with inner/outer shadows, tactile feel for skeuomorphic enthusiasts.',
+    interactiveElements: [
+      'Key press depth',
+      'Haptic feedback simulation',
+      'History tape',
+      'Scientific mode',
+      'Theme colors'
+    ],
+    pexelsQuery: 'neumorphism UI calculator',
+    colors: {
+      primary: '#E0E5EC',
+      background: '#E0E5EC',
+      text: '#3D3D3D',
+      accent: '#9BA3AB',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/neumorphism-soft-calculator.zip',
+  },
+  {
+    id: 64,
+    slug: 'pacman-arcade-interface',
+    title: 'Pacman Arcade Interface',
+    skill: 'pacman',
+    category: 'Applications & Tools',
+    description: 'Maze-chase game UI with retro arcade aesthetics, pixel fonts, quarter-slot metaphors for gamification.',
+    interactiveElements: [
+      'Maze generator',
+      'Ghost AI selector',
+      'High score table',
+      'Cabinet artwork',
+      'Joystick config'
+    ],
+    pexelsQuery: 'arcade game cabinet',
+    colors: {
+      primary: '#FFFF00',
+      background: '#000000',
+      text: '#FFFF00',
+      accent: '#FF0000',
+    },
+    fonts: {
+      heading: 'Press Start 2P, cursive',
+      body: 'Press Start 2P, cursive',
+    },
+    downloadUrl: '/assets/pacman-arcade-interface.zip',
+  },
+  {
+    id: 65,
+    slug: 'paper-texture-sketchbook',
+    title: 'Paper Texture Sketchbook',
+    skill: 'paper',
+    category: 'Applications & Tools',
+    description: 'Textured paper sketchbook with realistic grain, ink bleed, binding metaphors for digital artists.',
+    interactiveElements: [
+      'Paper type selector',
+      'Pen/pencil/brush tools',
+      'Layer blending',
+      'Page turn',
+      'Export textures'
+    ],
+    pexelsQuery: 'paper texture sketchbook',
+    colors: {
+      primary: '#8B4513',
+      background: '#F5F0E1',
+      text: '#3D2B1F',
+      accent: '#D4A574',
+    },
+    fonts: {
+      heading: 'Patrick Hand, cursive',
+      body: 'Patrick Hand, cursive',
+    },
+    downloadUrl: '/assets/paper-texture-sketchbook.zip',
+  },
+  {
+    id: 66,
+    slug: 'perspective-3d-card-carousel',
+    title: 'Perspective 3D Card Carousel',
+    skill: 'perspective',
+    category: 'Applications & Tools',
+    description: 'True 3D perspective carousel with depth, rotation, vanishing point for immersive galleries.',
+    interactiveElements: [
+      'Auto-rotate pause',
+      'Perspective intensity',
+      'Reflection toggle',
+      'Focus zoom',
+      'Keyboard navigation'
+    ],
+    pexelsQuery: '3D carousel perspective',
+    colors: {
+      primary: '#6366F1',
+      background: '#0F172A',
+      text: '#F8FAFC',
+      accent: '#F472B6',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/perspective-3d-card-carousel.zip',
+  },
+  {
+    id: 67,
+    slug: 'power-data-visualization',
+    title: 'Power Data Visualization',
+    skill: 'power',
+    category: 'Applications & Tools',
+    description: 'High-density power-user viz with small multiples, linked brushing, cross-filtering for analysts.',
+    interactiveElements: [
+      'Brush selection',
+      'Detail-on-demand',
+      'Query builder',
+      'Dashboard parameters',
+      'Shareable URL state'
+    ],
+    pexelsQuery: 'data visualization analytics',
+    colors: {
+      primary: '#8B5CF6',
+      background: '#FAFAFA',
+      text: '#1F2937',
+      accent: '#F59E0B',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'JetBrains Mono, monospace',
+    },
+    downloadUrl: '/assets/power-data-visualization.zip',
+  },
+  {
+    id: 68,
+    slug: 'premium-luxury-configurator',
+    title: 'Premium Luxury Configurator',
+    skill: 'premium',
+    category: 'Applications & Tools',
+    description: 'High-end product configurator with refined materials, subtle motion, craftsmanship focus for luxury brands.',
+    interactiveElements: [
+      'Material swatch realism',
+      '360° view',
+      'Engraving preview',
+      'Price calculator',
+      'Concierge chat'
+    ],
+    pexelsQuery: 'luxury product configurator',
+    colors: {
+      primary: '#B8860B',
+      background: '#FAF9F6',
+      text: '#1A1A1A',
+      accent: '#8B7355',
+    },
+    fonts: {
+      heading: 'Playfair Display, serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/premium-luxury-configurator.zip',
+  },
+  {
+    id: 69,
+    slug: 'professional-services-portal',
+    title: 'Professional Services Portal',
+    skill: 'professional',
+    category: 'Applications & Tools',
+    description: 'Trust-focused client portal for law/consulting/finance with restrained elegance, clear IA.',
+    interactiveElements: [
+      'Document vault',
+      'Billing timeline',
+      'Secure messaging',
+      'Calendar sync',
+      'E-signature flow'
+    ],
+    pexelsQuery: 'professional office portal',
+    colors: {
+      primary: '#1E3A8A',
+      background: '#F8FAFC',
+      text: '#1E293B',
+      accent: '#3B82F6',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/professional-services-portal.zip',
+  },
+  {
+    id: 70,
+    slug: 'refined-typography-playground',
+    title: 'Refined Typography Playground',
+    skill: 'refined',
+    category: 'Applications & Tools',
+    description: 'Exquisite typesetting lab with optical sizing, variable fonts, baseline grid for typography perfectionists.',
+    interactiveElements: [
+      'Variable font axes',
+      'Rag adjustment',
+      'Hyphenation control',
+      'OpenType features',
+      'Specimen generator'
+    ],
+    pexelsQuery: 'typography design',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#000000',
+      accent: '#666666',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/refined-typography-playground.zip',
+  },
+  {
+    id: 71,
+    slug: 'retro-80s-synthwave-app',
+    title: 'Retro 80s Synthwave App',
+    skill: 'retro',
+    category: 'Applications & Tools',
+    description: '80s synthwave aesthetic with scanlines, CRT curves, neon grids for nostalgic apps/music tools.',
+    interactiveElements: [
+      'CRT flicker',
+      'VHS tracking noise',
+      'Cassette tape loader',
+      'Palette cycles',
+      'MIDI visualizer'
+    ],
+    pexelsQuery: 'synthwave retro aesthetic',
+    colors: {
+      primary: '#FF00FF',
+      background: '#1A0033',
+      text: '#00FFFF',
+      accent: '#FFFF00',
+    },
+    fonts: {
+      heading: 'Orbitron, system-ui, sans-serif',
+      body: 'VT323, monospace',
+    },
+    downloadUrl: '/assets/retro-80s-synthwave-app.zip',
+  },
+  {
+    id: 72,
+    slug: 'riso-print-design-tool',
+    title: 'Riso Print Design Tool',
+    skill: 'riso',
+    category: 'Applications & Tools',
+    description: 'Risograph print simulator with spot colors, misregistration, texture for print designers.',
+    interactiveElements: [
+      'Color separation preview',
+      'Drum selector',
+      'Registration error slider',
+      'Paper stock',
+      'Print-ready PDF'
+    ],
+    pexelsQuery: 'risograph printing',
+    colors: {
+      primary: '#FF6B35',
+      background: '#FDF8F0',
+      text: '#2D2D2D',
+      accent: '#00A8A8',
+    },
+    fonts: {
+      heading: 'Space Grotesk, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/riso-print-design-tool.zip',
+  },
+  {
+    id: 73,
+    slug: 'roku-tv-app-interface',
+    title: 'Roku TV App Interface',
+    skill: 'roku',
+    category: 'Applications & Tools',
+    description: '10-foot TV UI with focus management, directional nav, channel grid for streaming apps.',
+    interactiveElements: [
+      'Focus ring animation',
+      'Springboard transitions',
+      'Voice search',
+      'Continue watching row',
+      'Parental controls'
+    ],
+    pexelsQuery: 'TV app interface',
+    colors: {
+      primary: '#E62B1E',
+      background: '#141414',
+      text: '#FFFFFF',
+      accent: '#FFFFFF',
+    },
+    fonts: {
+      heading: 'Roboto, system-ui, sans-serif',
+      body: 'Roboto, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/roku-tv-app-interface.zip',
+  },
+  {
+    id: 74,
+    slug: 'sega-genesis-game-menu',
+    title: 'Sega Genesis Game Menu',
+    skill: 'sega',
+    category: 'Applications & Tools',
+    description: '16-bit Sega-inspired menu with pixel art, chiptunes, mode 7 effects for retro game launchers.',
+    interactiveElements: [
+      'Sprite animation',
+      'Save slot cards',
+      'Cheat code input',
+      'CRT shader',
+      'Controller mapping'
+    ],
+    pexelsQuery: 'sega genesis retro gaming',
+    colors: {
+      primary: '#00D4AA',
+      background: '#001122',
+      text: '#00FFCC',
+      accent: '#FF6B35',
+    },
+    fonts: {
+      heading: 'Press Start 2P, cursive',
+      body: 'Press Start 2P, cursive',
+    },
+    downloadUrl: '/assets/sega-genesis-game-menu.zip',
+  },
+  {
+    id: 75,
+    slug: 'shadcn-ui-component-registry',
+    title: 'Shadcn/UI Component Registry',
+    skill: 'shadcn',
+    category: 'Applications & Tools',
+    description: 'Copy-paste component registry with Radix primitives, Tailwind, accessible by default for React devs.',
+    interactiveElements: [
+      'Component search',
+      'Dependency tree',
+      'Install command copy',
+      'Theme customizer',
+      'Block editor'
+    ],
+    pexelsQuery: 'React component library',
+    colors: {
+      primary: '#000000',
+      background: '#FFFFFF',
+      text: '#000000',
+      accent: '#000000',
+    },
+    fonts: {
+      heading: 'Inter, system-ui, sans-serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/shadcn-ui-component-registry.zip',
+  },
+  {
+    id: 76,
+    slug: 'sketch-hand-drawn-wireframes',
+    title: 'Sketch Hand-Drawn Wireframes',
+    skill: 'sketch',
+    category: 'Applications & Tools',
+    description: 'Pencil-sketch wireframe tool with rough edges, paper texture, quick iteration for early design.',
+    interactiveElements: [
+      'Sketch fidelity slider',
+      'Sticky annotations',
+      'Flow arrows',
+      'Presentation mode',
+      'PDF export'
+    ],
+    pexelsQuery: 'hand drawn wireframe sketch',
+    colors: {
+      primary: '#4A4A4A',
+      background: '#F5F0E1',
+      text: '#3D3D3D',
+      accent: '#8B4513',
+    },
+    fonts: {
+      heading: 'Patrick Hand, cursive',
+      body: 'Patrick Hand, cursive',
+    },
+    downloadUrl: '/assets/sketch-hand-drawn-wireframes.zip',
+  },
+  {
+    id: 77,
+    slug: 'skeumorphism-tactile-controls',
+    title: 'Skeumorphism Tactile Controls',
+    skill: 'skeumorphism',
+    category: 'Applications & Tools',
+    description: 'Realistic physical controls with textures, lighting, affordances for audio/industrial interfaces.',
+    interactiveElements: [
+      'Knob rotation physics',
+      'Switch toggle weight',
+      'Fader momentum',
+      'Material presets',
+      'MIDI learn'
+    ],
+    pexelsQuery: 'skeuomorphic UI controls',
+    colors: {
+      primary: '#8B4513',
+      background: '#2D2D2D',
+      text: '#F5F5F5',
+      accent: '#FFD700',
+    },
+    fonts: {
+      heading: 'Georgia, serif',
+      body: 'Inter, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/skeumorphism-tactile-controls.zip',
+  },
+  {
+    id: 78,
+    slug: 'sleek-mobile-app-shell',
+    title: 'Sleek Mobile App Shell',
+    skill: 'sleek',
+    category: 'Applications & Tools',
+    description: 'Polished mobile shell with safe areas, gesture nav, haptics, platform conventions for iOS/Android.',
+    interactiveElements: [
+      'Swipe-back',
+      'Pull-to-refresh',
+      'Tab bar morph',
+      'Sheet detents',
+      'Dynamic island integration'
+    ],
+    pexelsQuery: 'mobile app interface',
+    colors: {
+      primary: '#007AFF',
+      background: '#FFFFFF',
+      text: '#000000',
+      accent: '#34C759',
+    },
+    fonts: {
+      heading: 'SF Pro Display, system-ui, sans-serif',
+      body: 'SF Pro Text, system-ui, sans-serif',
+    },
+    downloadUrl: '/assets/sleek-mobile-app-shell.zip',
+  },
 ];
 
+// Category list for filtering
 export const designCategories = [
   'Landing Pages & Marketing',
   'Dashboards & Data',
@@ -95,14 +2138,19 @@ export const designCategories = [
   'Experimental & Playful',
 ];
 
+// Helper functions
 export function getDesignById(id) {
-  return initialDesignTemplates.find(d => d.id === id);
+  return designTemplates.find(d => d.id === id);
 }
 
 export function getDesignBySlug(slug) {
-  return initialDesignTemplates.find(d => d.slug === slug);
+  return designTemplates.find(d => d.slug === slug);
 }
 
 export function getDesignsByCategory(category) {
-  return initialDesignTemplates.filter(d => d.category === category);
+  return designTemplates.filter(d => d.category === category);
+}
+
+export function getDesignsBySkill(skill) {
+  return designTemplates.filter(d => d.skill === skill);
 }
