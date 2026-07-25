@@ -1,7 +1,114 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import anime from 'animejs';
 import { designComponents } from '../data/designComponents';
 import { useDesignTextEffects } from '../hooks/useDesignTextEffects';
+import ErrorBoundary from './ErrorBoundary';
+
+// ─── Animated Title Component ──────────────────────────────────────────────────
+
+function AnimatedModalTitle({ text, design, skill }) {
+  const ref = useRef(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    if (hasAnimated) return;
+    const el = ref.current;
+    if (!el) return;
+
+    setHasAnimated(true);
+    const letters = el.querySelectorAll('.title-letter');
+    anime.timeline({ easing: 'easeOutExpo' })
+      .add({
+        targets: letters,
+        translateY: [30, 0],
+        opacity: [0, 1],
+        rotateX: [90, 0],
+        duration: 500,
+        delay: anime.stagger(30),
+      });
+  }, [hasAnimated]);
+
+  const letters = text.split('').map((char, i) => (
+    <span
+      key={i}
+      className="title-letter inline-block"
+      style={{ opacity: 0, fontFamily: design?.fonts?.heading || 'inherit' }}
+    >
+      {char === ' ' ? '\u00A0' : char}
+    </span>
+  ));
+
+  return (
+    <h2 ref={ref} id="modal-title" className="text-xl md:text-2xl font-semibold">
+      {letters}
+    </h2>
+  );
+}
+
+// ─── Typewriter Subtitle ───────────────────────────────────────────────────────
+
+function TypewriterSubtitle({ text, design }) {
+  const [displayed, setDisplayed] = useState('');
+  const [done, setDone] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const startTimer = setTimeout(() => setStarted(true), 400);
+    return () => clearTimeout(startTimer);
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) {
+        clearInterval(interval);
+        setDone(true);
+      }
+    }, 25);
+    return () => clearInterval(interval);
+  }, [started, text]);
+
+  return (
+    <p className="text-sm" style={{ color: design?.colors?.text || '#6B7280' }}>
+      {displayed}
+      {!done && <span className="animate-pulse" style={{ color: design?.colors?.primary || '#3B82F6' }}>|</span>}
+    </p>
+  );
+}
+
+// ─── Loading Skeleton ──────────────────────────────────────────────────────────
+
+function ModalLoadingSkeleton({ design }) {
+  return (
+    <div className="p-6 space-y-6 animate-pulse" style={{ backgroundColor: design?.colors?.background || '#FFFFFF' }}>
+      {/* Title bar skeleton */}
+      <div className="flex items-center gap-4">
+        <div className="w-10 h-10 rounded-lg" style={{ backgroundColor: (design?.colors?.primary || '#E5E7EB') + '30' }} />
+        <div className="space-y-2 flex-1">
+          <div className="h-6 rounded w-3/4" style={{ backgroundColor: (design?.colors?.primary || '#E5E7EB') + '20' }} />
+          <div className="h-4 rounded w-1/2" style={{ backgroundColor: (design?.colors?.primary || '#E5E7EB') + '15' }} />
+        </div>
+      </div>
+      {/* Content skeleton */}
+      <div className="space-y-4">
+        <div className="h-8 rounded w-1/3" style={{ backgroundColor: (design?.colors?.primary || '#E5E7EB') + '15' }} />
+        <div className="h-4 rounded w-full" style={{ backgroundColor: (design?.colors?.primary || '#E5E7EB') + '10' }} />
+        <div className="h-4 rounded w-5/6" style={{ backgroundColor: (design?.colors?.primary || '#E5E7EB') + '10' }} />
+        <div className="grid grid-cols-3 gap-4 mt-8">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="h-32 rounded-xl" style={{ backgroundColor: (design?.colors?.primary || '#E5E7EB') + '10' }} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main DesignModal ──────────────────────────────────────────────────────────
 
 export default function DesignModal({ 
   design, 
@@ -12,7 +119,16 @@ export default function DesignModal({
 }) {
   const modalRef = useRef(null);
   const titleBarRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { applyTextEffects } = useDesignTextEffects(design?.skill || 'default');
+
+  // Simulate loading for dynamic components
+  useEffect(() => {
+    if (!isOpen || !design) return;
+    setIsLoading(true);
+    const timer = setTimeout(() => setIsLoading(false), 300 + Math.random() * 400);
+    return () => clearTimeout(timer);
+  }, [isOpen, design?.slug]);
 
   useEffect(() => {
     if (isOpen) {
@@ -105,19 +221,8 @@ export default function DesignModal({
               </motion.button>
               
               <div>
-                <motion.h2 
-                  id="modal-title"
-                  className="text-xl md:text-2xl font-semibold text-gray-900"
-                  layoutId={`${layoutId}-title-${design.id}`}
-                >
-                  {design.title}
-                </motion.h2>
-                <motion.p 
-                  className="text-sm text-gray-500"
-                  layoutId={`${layoutId}-skill-${design.id}`}
-                >
-                  {design.skill} • {design.category}
-                </motion.p>
+                <AnimatedModalTitle text={design.title} design={design} skill={design.skill} />
+                <TypewriterSubtitle text={`${design.skill} • ${design.category}`} design={design} />
               </div>
             </div>
 
@@ -139,8 +244,14 @@ export default function DesignModal({
           </motion.header>
 
           {/* Design Content */}
-          <div className="overflow-y-auto max-h-[calc(90vh-80px)] md:max-h-[calc(95vh-80px)] p-6">
-            <Component design={design} />
+          <div className="overflow-y-auto max-h-[calc(90vh-80px)] md:max-h-[calc(95vh-80px)]">
+            {isLoading ? (
+              <ModalLoadingSkeleton design={design} />
+            ) : (
+              <ErrorBoundary design={design}>
+                <Component design={design} />
+              </ErrorBoundary>
+            )}
           </div>
         </motion.div>
       </motion.div>
