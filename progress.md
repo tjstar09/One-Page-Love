@@ -60,3 +60,17 @@
 - [x] **Add loading states** — ModalLoadingSkeleton with animated pulse placeholders matching design colors
 - [x] **Add error boundaries** — ErrorBoundary component wrapping all dynamic template renders with graceful fallback UI, retry button, and download option
 - [x] **UX Polish** — Anime.js letter animations on modal open, typewriter subtitle effect, smooth loading transitions, error recovery without app crash
+
+## Phase 5 Extended: Enhanced Gallery Experience (Option B) - COMPLETE
+- [x] **Category filtering** — Clickable filter chips for all 5 categories + "All" with live count badges
+- [x] **Search** — Real-time search input filtering by title, skill, description, and category with Ctrl+F keyboard shortcut
+- [x] **Favorites/bookmarking** — Heart toggle with localStorage persistence, dedicated "Favorites" filter mode with count badge
+- [x] **Shareable URLs** — URL hash (`#design-{slug}`) and query param (`?index=N`) for direct linking to specific designs
+- [x] **Results count** — Live "Showing X of Y templates" indicator with empty state messaging
+- [x] **Keyboard accessibility** — Ctrl+F to focus search, category chips with aria-selected, proper role attributes
+
+## Future Phases (Planned)
+- [ ] **Option A: Complete 74 Missing Custom Components** — Build unique interactive components for each design skill
+- [ ] **Option C: Design Playground Mode** — Interactive editor for tweaking colors, fonts, spacing in real-time with export
+- [ ] **Option D: Production Hardening** — Virtualized rendering for 78 items, unit/integration tests (Vitest + RTL), CI/CD pipeline, code splitting
+- [ ] **Option E: Accessibility Audit** — Full WCAG 2.1 AA compliance, screen reader testing, keyboard navigation pass
