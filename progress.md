@@ -71,8 +71,56 @@
 - [x] **Keyboard accessibility** — Ctrl+F to focus search, Home/End keys for gallery navigation, category chips with aria-selected, proper role attributes, focus trap in modal
 - [x] **Per-tile favorite toggle** — Heart icon on each design tile to add/remove favorites directly from the gallery
 
+## Phase 6: Apple-Style Cover Flow Replacement - COMPLETE
+- [x] **Replace Framer Motion horizontal scroll** with true CSS 3D Cover Flow (perspective: 1000px, rotateY ±45deg, translateZ)
+- [x] **Hardware-accelerated 3D transforms** using raw CSS (will-change, backface-visibility, transform-style: preserve-3d)
+- [x] **Scroll hijacking fix** — `{ passive: false }` wheel listener with e.preventDefault() to stop page scroll
+- [x] **One-card-per-scroll throttle** — 450ms debounce ensures single increment per wheel tick
+- [x] **Auto-scroll with pause conditions** — 3000ms interval pauses on hover, touch, and isPopupOpen
+- [x] **Click behavior** — Center card opens modal, side cards navigate to center
+- [x] **Responsive visible cards** — 1 side (mobile), 2 (tablet), 3 (desktop), 4 (large desktop) via JS logic
+- [x] **Keyboard navigation** — Arrow keys, Home/End, Enter/Space
+- [x] **Touch/swipe support** — 50px threshold with same throttle logic
+- [x] **Accessibility** — ARIA roles, focus management, reduced-motion support
+- [x] **Fixed "many cards break" bug** — Removed CSS nth-child hiding, moved visibility to JS logic
+
+## Phase 7: Browse/Grid View Toggle - COMPLETE
+- [x] **View mode toggle** — Cover Flow / List (Grid) buttons in gallery header
+- [x] **ListView component** — Responsive CSS Grid (1 col mobile → 4 col XL)
+- [x] **List card features** — Framer Motion layout animations, async image loading, skeleton/error states
+- [x] **Per-card actions** — Favorite toggle, skill/category badges, interactive element tags, color swatches, View Design button
+- [x] **Shared state** — Both views share filtering, favorites, search, and selection state
+
 ## Future Phases (Planned)
-- [ ] **Option A: Complete 74 Missing Custom Components** — Build unique interactive components for each design skill
-- [ ] **Option C: Design Playground Mode** — Interactive editor for tweaking colors, fonts, spacing in real-time with export
-- [ ] **Option D: Production Hardening** — Virtualized rendering for 78 items, unit/integration tests (Vitest + RTL), CI/CD pipeline, code splitting
-- [ ] **Option E: Accessibility Audit** — Full WCAG 2.1 AA compliance, screen reader testing, keyboard navigation pass
+
+### Option A: Complete 74 Missing Custom Components
+- [ ] Build unique interactive components for each design skill (agentic, bento, cafe, clean, corporate, etc.)
+- [ ] Replace DefaultDesign fallback with skill-specific implementations
+- [ ] Each component demonstrates its namesake design language authentically
+
+### Option C: Design Playground Mode
+- [ ] Interactive editor for tweaking colors, fonts, spacing in real-time
+- [ ] Live preview with export to design.md / skills.md / zip
+- [ ] Theme builder with CSS variable generation
+- [ ] Component state gallery (hover, focus, disabled, loading)
+
+### Option D: Production Hardening
+- [ ] Virtualized rendering for 78+ items (react-window / tanstack-virtual)
+- [ ] Unit/integration tests (Vitest + React Testing Library)
+- [ ] CI/CD pipeline (GitHub Actions)
+- [ ] Code splitting and lazy loading for modal components
+- [ ] Bundle size analysis and optimization
+
+### Option E: Accessibility Audit
+- [ ] Full WCAG 2.1 AA compliance audit
+- [ ] Screen reader testing (NVDA, VoiceOver, JAWS)
+- [ ] Keyboard navigation pass (focus order, skip links, focus indicators)
+- [ ] Color contrast verification across all 78 design color palettes
+- [ ] Reduced motion preferences respected everywhere
+
+### Option F: Performance & Scale
+- [ ] Image optimization (WebP/AVIF, responsive srcset, lazy loading)
+- [ ] Service worker for offline-first caching (Workbox)
+- [ ] Preload critical assets, defer non-critical
+- [ ] Virtual scrolling for both Cover Flow and List views
+- [ ] Bundle analysis and tree-shaking unused Framer Motion features

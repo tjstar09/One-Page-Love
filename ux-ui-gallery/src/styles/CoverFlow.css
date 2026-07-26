@@ -1,0 +1,324 @@
+.coverflow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.coverflow-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.coverflow-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  height: 400px;
+  transform-origin: center center;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: 
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.5s ease,
+    z-index 0.5s step-end;
+  cursor: pointer;
+}
+
+.coverflow-card:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 4px;
+}
+
+.coverflow-card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card-bg, #fff);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, filter 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.coverflow-card-center .coverflow-card-inner {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(59, 130, 246, 0.2);
+  filter: none;
+}
+
+.coverflow-card-side .coverflow-card-inner {
+  filter: grayscale(0.4) brightness(0.85);
+  opacity: 0.7;
+}
+
+.coverflow-card-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.coverflow-card-image {
+  width: 100%;
+  height: 65%;
+  object-fit: cover;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+
+.coverflow-card-content {
+  padding: 16px;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.coverflow-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.coverflow-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.coverflow-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  color: #374151;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.coverflow-badge-skill {
+  background: var(--skill-bg, rgba(59, 130, 246, 0.1));
+  color: var(--skill-color, #3b82f6);
+  border-color: var(--skill-border, rgba(59, 130, 246, 0.2));
+}
+
+.coverflow-badge-category {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+  border-color: rgba(107, 114, 128, 0.2);
+}
+
+.coverflow-card-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+  z-index: 10;
+}
+
+.coverflow-card-error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  color: #9ca3af;
+  z-index: 10;
+}
+
+.coverflow-center-indicator {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background: #3b82f6;
+  border-radius: 9999px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.coverflow-card-center .coverflow-center-indicator {
+  opacity: 1;
+}
+
+.coverflow-navigation {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.coverflow-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.coverflow-nav-btn:hover:not(:disabled) {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.coverflow-nav-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.coverflow-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.coverflow-nav-btn:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 3px;
+}
+
+.coverflow-nav-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.coverflow-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coverflow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d1d5db;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.coverflow-dot:hover {
+  background: #9ca3af;
+  transform: scale(1.2);
+}
+
+.coverflow-dot.active {
+  background: #3b82f6;
+  width: 24px;
+  border-radius: 4px;
+}
+
+.coverflow-dot:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 3px;
+}
+
+@media (max-width: 639px) {
+  .coverflow-card {
+    width: 280px;
+    height: 350px;
+  }
+  
+  .coverflow-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .coverflow-navigation {
+    bottom: 16px;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .coverflow-card {
+    width: 320px;
+    height: 400px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .coverflow-card {
+    width: 340px;
+    height: 425px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .coverflow-card {
+    width: 360px;
+    height: 450px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coverflow-card {
+    transition: none !important;
+  }
+  
+  .coverflow-card-inner {
+    transition: none !important;
+  }
+  
+  .coverflow-dot {
+    transition: none !important;
+  }
+  
+  .coverflow-nav-btn {
+    transition: none !important;
+  }
+  
+  .coverflow-center-indicator {
+    transition: none !important;
+  }
+}
