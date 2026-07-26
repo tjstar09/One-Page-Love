@@ -45,6 +45,7 @@ export default function App() {
   
   // ── Filtering & Search ──
   const [activeCategory, setActiveCategory] = useState('all');
+  const [activeSkill, setActiveSkill] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [favoriteIds, setFavoriteIds] = useState(loadFavorites);
@@ -63,6 +64,12 @@ export default function App() {
     }
   }, [selectedIndex]);
 
+  // ── Unique skills list ──
+  const uniqueSkills = useMemo(() => {
+    const skills = [...new Set(designTemplates.map(d => d.skill))];
+    return skills.sort();
+  }, []);
+
   // ── Filtered designs ──
   const filteredDesigns = useMemo(() => {
     let list = designTemplates;
@@ -72,14 +79,27 @@ export default function App() {
       list = list.filter(d => d.category === activeCategory);
     }
     
-    // Search filter
+    // Skill filter
+    if (activeSkill !== 'all') {
+      list = list.filter(d => d.skill === activeSkill);
+    }
+    
+    // Search filter (title, skill, description, category, colors, interaction elements)
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       list = list.filter(d => 
         d.title.toLowerCase().includes(q) ||
         d.skill.toLowerCase().includes(q) ||
         d.description.toLowerCase().includes(q) ||
-        d.category.toLowerCase().includes(q)
+        d.category.toLowerCase().includes(q) ||
+        // Search by color hex values
+        Object.values(d.colors).some(color => color.toLowerCase().includes(q)) ||
+        // Search by color names
+        Object.keys(d.colors).some(name => name.toLowerCase().includes(q)) ||
+        // Search by interaction elements
+        d.interactiveElements.some(el => el.toLowerCase().includes(q)) ||
+        // Search by font names
+        Object.values(d.fonts).some(font => font.toLowerCase().includes(q))
       );
     }
     
@@ -89,7 +109,7 @@ export default function App() {
     }
     
     return list;
-  }, [activeCategory, searchQuery, showFavoritesOnly, favoriteIds]);
+  }, [activeCategory, activeSkill, searchQuery, showFavoritesOnly, favoriteIds]);
 
   // ── Preload images ──
   useEffect(() => {
@@ -163,11 +183,13 @@ export default function App() {
   }, []);
 
   const toggleFavorite = useCallback((designId) => {
-    setFavoriteIds(prev => 
-      prev.includes(designId) 
+    setFavoriteIds(prev => {
+      const next = prev.includes(designId) 
         ? prev.filter(id => id !== designId)
-        : [...prev, designId]
-    );
+        : [...prev, designId];
+      saveFavorites(next);
+      return next;
+    });
   }, []);
 
   const scrollToTop = useCallback(() => {
@@ -359,6 +381,48 @@ export default function App() {
                 </motion.button>
               </div>
 
+              {/* Skill Filter Chips */}
+              <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter by skill">
+                {[
+                  { id: 'all', label: 'All Skills', count: designTemplates.length },
+                  ...uniqueSkills.map(skill => ({ 
+                    id: skill, 
+                    label: skill.charAt(0).toUpperCase() + skill.slice(1), 
+                    count: designTemplates.filter(d => d.skill === skill).length 
+                  }))
+                ].map((skill, i) => {
+                  const skillChipColors = [
+                    '#6366F1', '#EC4899', '#14B8A6', '#F97316', '#8B5CF6',
+                    '#06B6D4', '#84CC16', '#E11D48', '#0EA5E9', '#A855F7',
+                  ];
+                  const chipColor = skillChipColors[i % skillChipColors.length];
+                  
+                  return (
+                    <motion.button
+                      key={skill.id}
+                      onClick={() => setActiveSkill(skill.id)}
+                      role="tab"
+                      aria-selected={activeSkill === skill.id}
+                      className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                        activeSkill === skill.id
+                          ? 'text-white shadow-sm'
+                          : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:text-gray-700'
+                      }`}
+                      style={activeSkill === skill.id ? { backgroundColor: chipColor } : {}}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      {skill.label}
+                      <span className={`ml-1 px-1 py-0.5 rounded text-[10px] ${
+                        activeSkill === skill.id ? 'bg-white/20' : 'bg-gray-100 text-gray-400'
+                      }`}>
+                        {skill.count}
+                      </span>
+                    </motion.button>
+                  );
+                })}
+              </div>
+
               {/* Category Filter Chips */}
               <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter by category">
                 {[
@@ -436,11 +500,13 @@ export default function App() {
 
             <div className="gallery-section">
               <GalleryView
-                key={`${activeCategory}-${searchQuery}-${showFavoritesOnly}`}
+                key={`${activeCategory}-${activeSkill}-${searchQuery}-${showFavoritesOnly}`}
                 designs={filteredDesigns.length > 0 ? filteredDesigns : designTemplates}
                 onDesignClick={handleDesignClick}
                 selectedIndex={selectedIndex}
                 onIndexChange={setSelectedIndex}
+                onFavoriteToggle={toggleFavorite}
+                favoriteIds={favoriteIds}
               />
             </div>
           </div>
