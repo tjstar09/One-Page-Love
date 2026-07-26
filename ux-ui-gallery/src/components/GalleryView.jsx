@@ -7,7 +7,9 @@ export default function GalleryView({
   designs, 
   onDesignClick, 
   selectedIndex = 0,
-  onIndexChange 
+  onIndexChange,
+  onFavoriteToggle,
+  favoriteIds = []
 }) {
   const containerRef = useRef(null);
   const itemsRef = useRef([]);
@@ -189,6 +191,12 @@ export default function GalleryView({
         if (designs[centeredIndex]) {
           onDesignClick(designs[centeredIndex], centeredIndex);
         }
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        animateToIndex(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        animateToIndex(designs.length - 1);
       }
     };
 
@@ -284,6 +292,8 @@ export default function GalleryView({
               : () => animateToIndex(index)
             }
             layoutId={`gallery-${design.id}`}
+            onFavoriteToggle={onFavoriteToggle}
+            isFavorited={favoriteIds.includes(design.id)}
           />
         </div>
       );

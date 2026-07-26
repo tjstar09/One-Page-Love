@@ -62,12 +62,14 @@
 - [x] **UX Polish** — Anime.js letter animations on modal open, typewriter subtitle effect, smooth loading transitions, error recovery without app crash
 
 ## Phase 5 Extended: Enhanced Gallery Experience (Option B) - COMPLETE
-- [x] **Category filtering** — Clickable filter chips for all 5 categories + "All" with live count badges
-- [x] **Search** — Real-time search input filtering by title, skill, description, and category with Ctrl+F keyboard shortcut
-- [x] **Favorites/bookmarking** — Heart toggle with localStorage persistence, dedicated "Favorites" filter mode with count badge
+- [x] **Category filtering** — Clickable filter chips for all 5 categories + "All" with live count badges and guaranteed high-contrast colors
+- [x] **Skill filtering** — Filter chips for all 78 unique design skills with count badges and distinct color palette
+- [x] **Search** — Real-time search input filtering by title, skill, description, category, color hex values, color names, interaction elements, and font names with Ctrl+F keyboard shortcut
+- [x] **Favorites/bookmarking** — Heart toggle on each tile with localStorage persistence, dedicated "Favorites" filter mode with count badge, per-tile favorite button
 - [x] **Shareable URLs** — URL hash (`#design-{slug}`) and query param (`?index=N`) for direct linking to specific designs
 - [x] **Results count** — Live "Showing X of Y templates" indicator with empty state messaging
-- [x] **Keyboard accessibility** — Ctrl+F to focus search, category chips with aria-selected, proper role attributes
+- [x] **Keyboard accessibility** — Ctrl+F to focus search, Home/End keys for gallery navigation, category chips with aria-selected, proper role attributes, focus trap in modal
+- [x] **Per-tile favorite toggle** — Heart icon on each design tile to add/remove favorites directly from the gallery
 
 ## Future Phases (Planned)
 - [ ] **Option A: Complete 74 Missing Custom Components** — Build unique interactive components for each design skill

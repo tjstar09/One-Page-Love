@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { searchPexelsImage } from '../utils/pexels';
 
-export default function DesignTile({ design, index, isActive, isCentered, onClick, layoutId }) {
+export default function DesignTile({ design, index, isActive, isCentered, onClick, layoutId, onFavoriteToggle, isFavorited }) {
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
@@ -138,18 +138,39 @@ export default function DesignTile({ design, index, isActive, isCentered, onClic
             )}
           </div>
           
-          {/* Maximize button */}
-          <motion.button
-            className="p-2 rounded-lg bg-white/80 hover:bg-white text-gray-600 hover:text-gray-900 shadow-md transition-colors"
-            onClick={(e) => { e.stopPropagation(); onClick(); }}
-            aria-label={`Maximize ${design.title}`}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-            </svg>
-          </motion.button>
+          <div className="flex items-center gap-1">
+            {/* Favorite Button */}
+            {onFavoriteToggle && (
+              <motion.button
+                onClick={(e) => { e.stopPropagation(); onFavoriteToggle(design.id); }}
+                className={`p-2 rounded-lg transition-colors ${
+                  isFavorited 
+                    ? 'text-pink-500 bg-pink-50' 
+                    : 'text-gray-400 bg-white/80 hover:bg-white hover:text-pink-400'
+                }`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label={isFavorited ? `Remove ${design.title} from favorites` : `Add ${design.title} to favorites`}
+              >
+                <svg className="w-4 h-4" fill={isFavorited ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </motion.button>
+            )}
+
+            {/* Maximize button */}
+            <motion.button
+              className="p-2 rounded-lg bg-white/80 hover:bg-white text-gray-600 hover:text-gray-900 shadow-md transition-colors"
+              onClick={(e) => { e.stopPropagation(); onClick(); }}
+              aria-label={`Maximize ${design.title}`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+              </svg>
+            </motion.button>
+          </div>
         </div>
       </div>
     </motion.article>
