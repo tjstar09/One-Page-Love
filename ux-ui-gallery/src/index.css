@@ -8,6 +8,39 @@
   box-sizing: border-box;
 }
 
+/* ─── Skip to Content Link ──────────────────────────────────────────────────── */
+.skip-to-content {
+  position: fixed;
+  top: -9999px;
+  left: 50%;
+  z-index: 10000;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  background: #1A1A2E;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+  opacity: 1;
+}
+
+/* ─── Reduced Motion ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -19,4 +52,49 @@ body {
 #root {
   width: 100%;
   min-height: 100vh;
+}
+
+/* ─── Focus Visible Styles ──────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid #3B82F6;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Utility class to visually hide content while keeping it accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ─── Scrollbar Styles ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3B82F6, #8B5CF6);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563EB, #7C3AED);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3B82F6 #f1f1f1;
 }

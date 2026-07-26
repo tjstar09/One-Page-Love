@@ -25,23 +25,26 @@ export default class ErrorBoundary extends Component {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
+          role="alert"
+          aria-live="assertive"
         >
           <motion.div
             className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
             style={{ backgroundColor: (design.colors?.primary || '#EF4444') + '15' }}
             initial={{ rotate: -10 }}
             animate={{ rotate: 0 }}
+            aria-hidden="true"
           >
-            <svg className="w-10 h-10" style={{ color: design.colors?.primary || '#EF4444' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-10 h-10" style={{ color: design.colors?.primary || '#EF4444' }} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
           </motion.div>
 
-          <h3 className="text-xl font-semibold mb-2" style={{ color: design.colors?.text || '#111827', fontFamily: design.fonts?.heading || 'inherit' }}>
+          <h3 className="text-xl font-semibold mb-2" style={{ color: design.colors?.text || '#111827', fontFamily: design.fonts?.heading || 'inherit' }} id="error-boundary-heading">
             Design Preview Unavailable
           </h3>
           
-          <p className="text-gray-500 mb-6 max-w-md mx-auto" style={{ fontFamily: design.fonts?.body || 'inherit' }}>
+          <p className="text-gray-500 mb-6 max-w-md mx-auto" style={{ fontFamily: design.fonts?.body || 'inherit' }} aria-describedby="error-boundary-heading">
             This interactive template encountered an error while rendering. The design data is still available for download.
           </p>
 
@@ -52,6 +55,7 @@ export default class ErrorBoundary extends Component {
               style={{ backgroundColor: design.colors?.primary || '#3B82F6' }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
+              aria-label="Retry loading the design template"
             >
               Try Again
             </motion.button>
@@ -63,6 +67,7 @@ export default class ErrorBoundary extends Component {
               style={{ borderColor: design.colors?.primary || '#3B82F6', color: design.colors?.primary || '#3B82F6' }}
               whileHover={{ backgroundColor: (design.colors?.primary || '#3B82F6') + '10' }}
               whileTap={{ scale: 0.98 }}
+              aria-label={`Download ${design.title || 'design'} template`}
             >
               Download Template
             </motion.a>

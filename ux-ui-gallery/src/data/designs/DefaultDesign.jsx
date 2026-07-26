@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import anime from 'animejs';
-import { useDesignTextEffects } from '../../hooks/useDesignTextEffects';
+import { useDesignTextEffects, useReducedMotion } from '../../hooks/useDesignTextEffects';
 
 // ─── Category-specific layout generators ───────────────────────────────────────
 
@@ -299,10 +299,22 @@ function ColorTypographySection({ design, textFx }) {
 function AnimatedHeading({ text, design, className = '', as: Tag = 'h2', ...props }) {
   const ref = useRef(null);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
     if (!el || hasAnimated) return;
+
+    // If user prefers reduced motion, just show the text immediately
+    if (reducedMotion) {
+      const letters = el.querySelectorAll('.letter');
+      letters.forEach(letter => {
+        letter.style.opacity = '1';
+        letter.style.transform = 'none';
+      });
+      setHasAnimated(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -327,11 +339,11 @@ function AnimatedHeading({ text, design, className = '', as: Tag = 'h2', ...prop
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [hasAnimated]);
+  }, [hasAnimated, reducedMotion]);
 
   // Split text into letters wrapped in spans
   const letters = text.split('').map((char, i) => (
-    <span key={i} className="letter inline-block" style={{ opacity: 0 }}>
+    <span key={i} className="letter inline-block" style={{ opacity: reducedMotion ? 1 : 0 }}>
       {char === ' ' ? '\u00A0' : char}
     </span>
   ));
@@ -346,8 +358,16 @@ function AnimatedHeading({ text, design, className = '', as: Tag = 'h2', ...prop
 function TypewriterText({ text, design, className = '', speed = 40, startDelay = 300 }) {
   const [displayed, setDisplayed] = useState('');
   const [done, setDone] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
+    // If user prefers reduced motion, show the full text immediately
+    if (reducedMotion) {
+      setDisplayed(text);
+      setDone(true);
+      return;
+    }
+
     let i = 0;
     const timer = setTimeout(() => {
       const interval = setInterval(() => {
@@ -361,12 +381,12 @@ function TypewriterText({ text, design, className = '', speed = 40, startDelay =
       return () => clearInterval(interval);
     }, startDelay);
     return () => clearTimeout(timer);
-  }, [text, speed, startDelay]);
+  }, [text, speed, startDelay, reducedMotion]);
 
   return (
     <span className={className} style={{ fontFamily: design.fonts.body, color: design.colors.text }}>
       {displayed}
-      {!done && <span className="animate-pulse" style={{ color: design.colors.primary }}>|</span>}
+      {!done && !reducedMotion && <span className="animate-pulse" style={{ color: design.colors.primary }}>|</span>}
     </span>
   );
 }

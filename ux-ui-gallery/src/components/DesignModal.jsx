@@ -130,17 +130,27 @@ export default function DesignModal({
     return () => clearTimeout(timer);
   }, [isOpen, design?.slug]);
 
+  // Store the previously focused element to restore focus on close
+  const previousFocusRef = useRef(null);
+
   useEffect(() => {
     if (isOpen) {
+      // Store the currently focused element before opening modal
+      previousFocusRef.current = document.activeElement;
+      
       document.body.style.overflow = 'hidden';
-      // Focus trap
+      
+      // Focus the modal container or first focusable element
       const focusableElements = modalRef.current?.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
       const firstFocusable = focusableElements?.[0];
       const lastFocusable = focusableElements?.[focusableElements.length - 1];
       
-      firstFocusable?.focus();
+      // Small delay to ensure the modal is rendered
+      requestAnimationFrame(() => {
+        firstFocusable?.focus();
+      });
       
       const handleTab = (e) => {
         if (e.key !== 'Tab') return;
@@ -162,6 +172,8 @@ export default function DesignModal({
       return () => {
         document.removeEventListener('keydown', handleTab);
         document.body.style.overflow = '';
+        // Restore focus to the previously focused element
+        previousFocusRef.current?.focus();
       };
     }
   }, [isOpen]);

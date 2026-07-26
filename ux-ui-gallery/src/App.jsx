@@ -238,10 +238,13 @@ export default function App() {
 
       {/* Main Content */}
       <motion.main
+        id="main-content"
         initial={false}
         animate={{ opacity: isLoading ? 0 : 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         className="min-h-screen"
+        role="main"
+        tabIndex={-1}
       >
         {/* Hero Header */}
         <header className="relative px-6 py-12 md:py-20 overflow-hidden">
@@ -474,7 +477,14 @@ export default function App() {
               </div>
 
               {/* Results count */}
-              <motion.p className="text-sm text-gray-500" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <motion.p 
+                className="text-sm text-gray-500" 
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }}
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              >
                 {filteredDesigns.length === 0 ? (
                   <span className="text-amber-600 font-medium">No templates match your filters.</span>
                 ) : (

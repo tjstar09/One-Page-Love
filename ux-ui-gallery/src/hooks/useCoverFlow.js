@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
+// Check if user prefers reduced motion
+function prefersReducedMotion() {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 export function useCoverFlow({ 
   cards, 
   isPopupOpen,
@@ -16,6 +22,7 @@ export function useCoverFlow({
   const autoPlayRef = useRef(null);
   const containerRef = useRef(null);
   const visibleCountRef = useRef(3);
+  const reducedMotionRef = useRef(prefersReducedMotion());
 
   const updateVisibleCount = useCallback(() => {
     if (typeof window === 'undefined') return;
@@ -32,7 +39,7 @@ export function useCoverFlow({
     return () => window.removeEventListener('resize', updateVisibleCount);
   }, [updateVisibleCount]);
 
-  const isPaused = isHovered || isTouching || isPopupOpen;
+  const isPaused = isHovered || isTouching || isPopupOpen || reducedMotionRef.current;
 
   const clearAutoPlay = useCallback(() => {
     if (autoPlayRef.current) {
@@ -42,6 +49,11 @@ export function useCoverFlow({
   }, []);
 
   const startAutoPlay = useCallback(() => {
+    // Never start auto-play for users who prefer reduced motion
+    if (reducedMotionRef.current) {
+      clearAutoPlay();
+      return;
+    }
     if (isPaused || cards.length <= 1) return;
     clearAutoPlay();
     autoPlayRef.current = setInterval(() => {

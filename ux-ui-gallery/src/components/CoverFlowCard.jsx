@@ -1,5 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { searchPexelsImage } from '../utils/pexels';
+
+// Get total count from the design templates data
+import { designTemplates } from '../data/designTemplates';
 
 export default function CoverFlowCard({ 
   design, 
@@ -10,6 +13,7 @@ export default function CoverFlowCard({
   onClick,
   style 
 }) {
+  const totalCount = useMemo(() => designTemplates?.length || 0, []);
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
@@ -57,9 +61,11 @@ export default function CoverFlowCard({
     <div
       className={cardClassName}
       style={style}
-      role={isCenter ? 'option' : 'group'}
+      role="option"
       aria-selected={isCenter}
-      aria-label={isCenter ? `View ${design.title} design template` : `${design.title} design template (click to focus)`}
+      aria-label={`${design.title} - ${design.skill} design${isCenter ? ' (currently focused, press Enter to open)' : ' (click to focus)'}`}
+      aria-posinset={index + 1}
+      aria-setsize={totalCount}
       tabIndex={isCenter ? 0 : -1}
       onClick={onClick}
       onKeyDown={(e) => {
@@ -76,13 +82,14 @@ export default function CoverFlowCard({
               <svg className="coverflow-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                 <circle className="coverflow-spinner-circle" cx="12" cy="12" r="10" strokeLinecap="round" />
               </svg>
+              <span className="sr-only">Loading image for {design.title}</span>
             </div>
           )}
 
           {image && !imageLoading && !imageError && (
             <img
               src={image.url}
-              alt={image.alt || design.title}
+              alt={image.alt || `${design.title} design preview`}
               className="coverflow-card-image"
               loading="lazy"
             />
@@ -93,6 +100,7 @@ export default function CoverFlowCard({
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
+              <span className="sr-only">Image failed to load for {design.title}</span>
             </div>
           )}
 

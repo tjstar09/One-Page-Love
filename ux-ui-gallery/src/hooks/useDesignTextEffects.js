@@ -1,4 +1,24 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useEffect, useState } from 'react';
+
+// Check if user prefers reduced motion
+function getPrefersReducedMotion() {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+// Hook to check reduced motion preference
+export function useReducedMotion() {
+  const [reduced, setReduced] = useState(getPrefersReducedMotion);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handler = (e) => setReduced(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
+  return reduced;
+}
 
 // Text effect configurations for different design skills
 const textEffects = {

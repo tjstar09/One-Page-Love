@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useCoverFlow } from '../hooks/useCoverFlow';
 import CoverFlowCard from './CoverFlowCard';
 import CoverFlowNavigation from './CoverFlowNavigation';
@@ -26,6 +26,18 @@ export default function CoverFlowGallery({
     isPopupOpen,
     initialIndex
   });
+
+  const announcerRef = useRef(null);
+
+  // Announce active index changes to screen readers
+  useEffect(() => {
+    if (cards.length > 0 && window.__a11yAnnounce) {
+      const card = cards[activeIndex];
+      if (card) {
+        window.__a11yAnnounce(`Showing design ${activeIndex + 1} of ${cards.length}: ${card.title}`);
+      }
+    }
+  }, [activeIndex, cards]);
 
   const handleCardInteraction = (index, card) => {
     if (index === activeIndex) {
@@ -61,6 +73,15 @@ export default function CoverFlowGallery({
       aria-label="Design template gallery"
       aria-roledescription="carousel"
     >
+      {/* Screen reader live region for current slide */}
+      <div
+        ref={announcerRef}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      />
+
       <div 
         className="coverflow-track" 
         ref={attachWheelListener}

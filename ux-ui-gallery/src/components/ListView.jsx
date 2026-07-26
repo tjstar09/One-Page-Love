@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { searchPexelsImage } from '../utils/pexels';
 
-function ListCard({ design, isFavorite, onClick, onFavoriteToggle }) {
+function ListCard({ design, isFavorite, onClick, onFavoriteToggle, index, totalCount }) {
   const [image, setImage] = useState(null);
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
@@ -175,7 +175,7 @@ export default function ListView({
 
   if (!designs.length) {
     return (
-      <div className="flex items-center justify-center h-64 text-gray-400">
+      <div className="flex items-center justify-center h-64 text-gray-400" role="status">
         <p>No templates to display</p>
       </div>
     );
@@ -184,10 +184,12 @@ export default function ListView({
   return (
     <div className="list-view" role="list" aria-label="Design templates list">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {designs.map((design) => (
+        {designs.map((design, index) => (
           <ListCard
             key={design.id}
             design={design}
+            index={index}
+            totalCount={designs.length}
             isFavorite={favoriteIds.includes(design.id)}
             onClick={() => handleCardClick(design)}
             onFavoriteToggle={handleFavoriteToggle}
